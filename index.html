@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFA SETTLER</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #d4d4d4;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: #333; color: #fff; }
+
+        /* ═══ MASTHEAD ═══ */
+        .masthead {
+            border-bottom: 3px double #333;
+            padding: 36px 0 20px;
+            text-align: center;
+        }
+
+        .masthead-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .dateline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .masthead h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .masthead-sub {
+            font-size: 0.82rem;
+            color: #555;
+            margin-top: 10px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .masthead-rule {
+            width: 60px;
+            height: 1px;
+            background: #333;
+            margin: 16px auto 0;
+        }
+
+        /* ═══ NAV ═══ */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .nav-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-tabs { display: flex; gap: 0; }
+
+        .nav-tab {
+            background: none; border: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #555;
+            padding: 14px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-tab:hover { color: #888; }
+        .nav-tab.active { color: #fff; border-bottom-color: #fff; }
+
+        .nav-tab .count {
+            font-size: 0.65rem;
+            color: #444;
+            margin-left: 4px;
+        }
+        .nav-tab.active .count { color: #666; }
+
+        .nav-actions {
+            display: flex; align-items: center; gap: 16px;
+        }
+
+        .nav-stat {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem; color: #444;
+        }
+
+        /* ═══ CONTENT ═══ */
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .feed-section { display: none; padding: 32px 0 60px; }
+        .feed-section.active { display: block; }
+
+        /* ═══ SECTION HEADER ═══ */
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #444;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #1a1a1a;
+            margin-bottom: 28px;
+        }
+
+        /* ═══ STORY — NEWSPAPER STYLE ═══ */
+        .story {
+            padding-bottom: 28px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid #141414;
+        }
+
+        .story:last-child { border-bottom: none; }
+
+        .story-meta-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .story-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #222;
+            line-height: 1;
+            min-width: 28px;
+        }
+
+        .story-source-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #444;
+        }
+
+        .story-time-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: #333;
+        }
+
+        .story-time-ago {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .story-dot {
+            width: 3px; height: 3px;
+            border-radius: 50%;
+            background: #333;
+        }
+
+        .story-headline {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.35;
+            color: #eee;
+            margin-bottom: 14px;
+            letter-spacing: -0.3px;
+        }
+
+        .story-body {
+            font-size: 0.88rem;
+            color: #888;
+            line-height: 1.85;
+            white-space: pre-line;
+        }
+
+        .story-body.collapsed {
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-toggle {
+            background: none; border: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #555;
+            cursor: pointer;
+            padding: 8px 0 0;
+            transition: color 0.15s;
+        }
+        .read-toggle:hover { color: #aaa; }
+
+        /* ═══ CFA TAGS ═══ */
+        .cfa-block {
+            margin-top: 16px;
+            padding: 16px 0 0;
+            border-top: 1px solid #141414;
+        }
+
+        .cfa-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .cfa-tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+
+        .cfa-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem; font-weight: 600;
+            padding: 4px 12px;
+            border: 1px solid #2a2a2a;
+            color: #777;
+            letter-spacing: 0.5px;
+        }
+
+        .exam-note {
+            font-size: 0.8rem;
+            color: #555;
+            font-style: italic;
+            padding-left: 14px;
+            border-left: 2px solid #222;
+            line-height: 1.6;
+        }
+        .exam-note strong { color: #777; font-style: normal; font-weight: 600; }
+
+        /* ═══ FILTER BAR ═══ */
+        .filter-bar {
+            display: flex; flex-wrap: wrap; gap: 6px;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .filter-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; font-weight: 500;
+            letter-spacing: 1px; text-transform: uppercase;
+            padding: 5px 12px;
+            border: 1px solid #1a1a1a;
+            background: transparent;
+            color: #444; cursor: pointer;
+            transition: all 0.15s;
+        }
+        .filter-btn:hover { border-color: #333; color: #777; }
+        .filter-btn.active { border-color: #555; color: #ccc; background: #111; }
+
+        /* ═══ EMPTY ═══ */
+        .empty-state {
+            text-align: center; padding: 60px 20px;
+            color: #333; font-size: 0.85rem;
+        }
+
+        /* ═══ FOOTER ═══ */
+        footer {
+            text-align: center;
+            padding: 28px 20px;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        footer p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; color: #2a2a2a;
+            letter-spacing: 1px; text-transform: uppercase;
+            line-height: 2;
+        }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 700px) {
+            .masthead h1 { font-size: 2rem; }
+            .nav-inner { flex-direction: column; gap: 8px; padding: 8px 24px; }
+            .story-headline { font-size: 1.2rem; }
+            .story-meta-line { flex-wrap: wrap; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ MASTHEAD ═══ -->
+    <div class="masthead">
+        <div class="masthead-inner">
+            <div class="dateline" id="dateline">loading...</div>
+            <h1>CFA SETTLER</h1>
+            <div class="masthead-sub">Markets · Economics · CFA Level 1 Digest</div>
+            <div class="masthead-rule"></div>
+        </div>
+    </div>
+
+    <!-- ═══ NAV ═══ -->
+    <div class="nav-bar">
+        <div class="nav-inner">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="general" onclick="switchTab('general')">
+                    General Feed <span class="count" id="count-general"></span>
+                </button>
+                <button class="nav-tab" data-tab="cfa" onclick="switchTab('cfa')">
+                    CFA Exam Feed <span class="count" id="count-cfa"></span>
+                </button>
+            </div>
+            <div class="nav-actions">
+                <span class="nav-stat" id="stat-stories"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ═══ GENERAL ═══ -->
+        <div class="feed-section active" id="section-general">
+            <div class="section-label">Top stories — Global & Indian markets</div>
+            <div id="general-feed"></div>
+        </div>
+
+        <!-- ═══ CFA ═══ -->
+        <div class="feed-section" id="section-cfa">
+            <div class="section-label">Stories tagged by CFA Level 1 curriculum</div>
+            <div class="filter-bar" id="cfa-filters"></div>
+            <div id="cfa-feed"></div>
+        </div>
+
+        <footer>
+            <p>CFA Settler · Auto-updated by GitHub Actions · IST (UTC+5:30) · Not financial advice</p>
+        </footer>
+    </div>
+
+<script>
+    // This variable will be injected during the build process
+    const allData = {"general": [{"title": "Subhadra Yojana 5th installment: How to check Odisha govt's \u20b95000 tranche payment status, beneficiary list", "full_content": "Subhadra Yojana fifth installment was released on Friday, 28 August \u2014 the flagship scheme of Odisha government to empower women through direct financial support. Odisha Chief Minister Mohan Charan Majhi released over \u20b9 5,160 crore funds, benefiting eligible women in the age group of 21 to 60 years.\n\nThe tranche payment of \u20b9 5000 is directed towards one crore women beneficiaries across the state is a part of government sponsored \u20b9 50,000 financial assistance over a period of five years. Under this scheme, beneficiaries receive \u20b9 10,000 payout annually which is divided equally into two payouts. Through the Direct Benefit Transfer (DBT) system, the government transfers funds directly to Aadhar-linked bank accounts of eligible women .\n\nFollow the steps given below to check Subhadra Yojana status online\n\nStep 1. Visit the official Subhadra Odisha Portal at subhadra.odisha.gov.in.\n\nStep 1. Visit the official Subhadra Odisha Portal at subhadra.odisha.gov.in.\n\nStep 4. Choose relevant block or urban local body and Gram Panchayat or ward.\n\nIf eligible beneficiary's name appears on the list, then they can verify payment details. In case, the list does not contain your name even if all the eligibility conditions are met, than candidates can contact nearest Anganwadi Centre, Common Service Centre (CSC), or Women & Child Development office for assistance. One can also reach out to the Subhadra Yojana toll-free helpline at 14678 for assistance.\n\nApplicants must ensure that their bank account is active, linked to Aadhaar and mapped with the NPCI DBT mapper. To confirm whether the instalment has been credited, beneficiaries must check their Aadhaar-linked bank account statement, passbook or transaction alerts.", "source": "LiveMint Money", "pub_date_str": "29 Aug 2026, 12:50 PM IST", "pub_date_relative": "6m ago"}, {"title": "OpenAI to cut off AI models for SpaceX-owned Cursor, escalating feud with Musk", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 12:36 PM IST", "pub_date_relative": "21m ago"}, {"title": "Bitcoin stalls at $77,465 with bearish momentum: Live levels", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 12:32 PM IST", "pub_date_relative": "24m ago"}, {"title": "Buy or sell stocks: Sumeet Bagadia recommends three shares to buy on Monday \u2014 31 August 2026", "full_content": "Buy or sell stocks for 31 August 2026: The Indian stock market ended the week on a cautious note, extending their recent corrective phase as concerns over global interest rates, geopolitical uncertainty, and volatility surrounding the new Closing Auction Session weighed on investor sentiment. Although markets recovered sharply on Friday, supported by strong buying in IT stocks following upbeat global technology cues, the benchmark indices remained under pressure for the third consecutive week.\n\nFor the week, the Nifty 50 index declined around 0.31% to close at 24,175.65, while the Sensex fell nearly 0.36% to settle at 77,264.51. In contrast, the broader market remained relatively resilient, with the Midcap and Smallcap indices gaining around 0.52% and 0.51%.\n\nSumeet Bagadia, Executive Director at Choice Broking, believes Indian stock market sentiment is cautious to positive as long as the Nifty 50 index trades above 23,900. He said that Nifty has an existing base at the 50-DEMA level (24,050) and the next strong base is in the 23,850-23,900 range. The Choice Broking expert predicted sharp selling pressure if the 50-stock index breaks decisively below 23,800.\n\nRegarding stocks to buy on Monday , Sumeet Bagadia recommended three shares to buy-or-sell on Monday: TCS, Axis Bank, and Bajaj Auto.\n\nTCS share price is showing signs of consolidation after a recent recovery, with the stock currently trading around \u20b9 2,342. The recent rally faced resistance near the 100-day EMA at \u20b9 2,361.60, where selling pressure emerged, keeping the stock below this key level.\n\nAxis Bank's share price is attempting to stabilise after a significant pullback from its recent highs, currently trading around \u20b9 1,265.", "source": "LiveMint Markets", "pub_date_str": "29 Aug 2026, 12:32 PM IST", "pub_date_relative": "24m ago"}, {"title": "F&O Talk: Traders should maintain caution amid CAS volatility, says Sudeep Shah; picks 6 stocks for next week", "full_content": "Home ETPrime Markets Market Data Masterclass News Industry SME Politics Wealth MF Tech AI Careers Opinion NRI Panache More Menu Business News \u203a Markets \u203a Expert Views \u203a F&O Talk: Traders should maintain caution amid CAS volatility, says Sudeep Shah; picks 6 stocks for next week The Economic Times daily newspaper is available online now. Read Today's Paper F&O Talk: Traders should maintain caution amid CAS volatility, says Sudeep Shah; picks 6 stocks for next week SECTIONS F&O Talk: Traders should maintain caution amid CAS volatility, says Sudeep Shah; picks 6 stocks for next week By Veer Sharma , ETMarkets.com Last Updated: Aug 29, 2026, 12:35:00 PM IST Rate Story Follow us Share Font Size Abc Small Abc Medium Abc Large Save Print Comment Synopsis The Indian stock market ended higher on Friday, but heightened volatility and sharp index divergences amid the Closing Auction Session (CAS) have kept traders cautious. Technical analyst Sudeep Shah expects Nifty and Sensex to remain range-bound, while highlighting key support and resistance levels and identifying six stocks that could outperform in the coming week.\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram. For fastest news alerts on financial markets, investment strategies and stocks alerts, subscribe to our Telegram feeds .)\n\nSubscribe to ET Prime and read the Economic Times ePaper Online.and Sensex Today .\n\nTop Trending Stocks: SBI Share Price , Axis Bank Share Price , HDFC Bank Share Price , Infosys Share Price , Wipro Share Price , NTPC Share Price\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram.", "source": "Economic Times Markets", "pub_date_str": "29 Aug 2026, 12:32 PM IST", "pub_date_relative": "25m ago"}, {"title": "How networking became the critical layer of AI", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 12:16 PM IST", "pub_date_relative": "40m ago"}, {"title": "Freeport-McMoRan director Lydia Kennard sells $300,470 in stock", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 12:16 PM IST", "pub_date_relative": "41m ago"}, {"title": "Ather Energy Launches Ather Node: New EV Charging Solution For Apartments - Key Details", "full_content": "Ather Energy\u2019s Ather Node will connect EV chargers across apartment complexes and larger housing societies, with the new solution set for launch in six cities by the end of 2026", "source": "NDTV Profit", "pub_date_str": "29 Aug 2026, 12:13 PM IST", "pub_date_relative": "44m ago"}, {"title": "Bethlehem Kudumba Unit Box Office Collection Day 8: Nivin Pauly Starrer Sees Growth, Check Earnings", "full_content": "After a strong first week, 'Bethlehem Kudumba Unit' saw a 9.1% jump on Day 8, pushing its India net collection to Rs 61.85 crore and gross to Rs 72.15 crore.", "source": "NDTV Profit", "pub_date_str": "29 Aug 2026, 12:11 PM IST", "pub_date_relative": "46m ago"}, {"title": "Argentina to ease pharma barriers as India trade tops $6.5 bn", "full_content": "Home ETPrime Markets Market Data Masterclass News Industry SME Politics Wealth MF Tech AI Careers Opinion NRI Panache More Menu Business News \u203a News \u203a Economy \u203a Foreign Trade \u203a Argentina to ease pharma barriers as India trade tops $6.5 bn The Economic Times daily newspaper is available online now. Read Today's Paper Argentina to ease pharma barriers as India trade tops $6.5 bn SECTIONS Argentina to ease pharma barriers as India trade tops $6.5 bn PTI Last Updated: Aug 29, 2026, 12:18:00 PM IST Rate Story Follow us Share Font Size Abc Small Abc Medium Abc Large Save Print Comment Synopsis Argentina committed to reducing barriers for Indian pharmaceutical entry. This move will offer greater opportunities for Indian companies and improve healthcare access. Discussions occurred during Commerce Secretary Rajesh Agarwal's visit to Buenos Aires this week. Bilateral trade between India and Argentina exceeded six point five billion dollars in 2025. Emerging cooperation areas include aviation, space technology, and digital services.\n\nListen Loading... \u00d7 \u00d7 Subscribe to Unlock AI Briefing and Premium Content\n\nBehind the sugar price drop: Exports, imports and a non-factor called ethanol\n\nAs IndiGo, Air India scramble for pilots, fresh headwinds hit hard\n\nWhen a CFO resigns, is \u2018personal reasons\u2019 explanation enough?\n\nFCNR (B) scheme garners USD65 bn, but why isn't the rupee gaining?\n\nET Prime special: Bigger, Better or Both? Understanding business to figure out the mystery: Power Grid Corp \u2013 Part 1\n\nChoose your reason below and click on the Report button. This will alert our moderators to take action", "source": "Economic Times Economy", "pub_date_str": "29 Aug 2026, 12:03 PM IST", "pub_date_relative": "53m ago"}, {"title": "Globalstar director Benjamin Wolff sells $1.64 million in stock", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 12:01 PM IST", "pub_date_relative": "56m ago"}, {"title": "DST Global Advisors sells $38.6 million of Chime Financial shares", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 12:01 PM IST", "pub_date_relative": "56m ago"}, {"title": "Randy Shefman, Royal Gold SVP, sells $131,400 in common stock", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 12:00 PM IST", "pub_date_relative": "56m ago"}, {"title": "8th Pay Commission delay could cost lower-ranked staff up to \u20b93.45 lakh in lost HRA and transport allowance", "full_content": "The 8th Pay Commission panel is tentatively expected to submit its final report to the central government by May-June 2027. Once the final report is submitted, the government will decide on pay revisions, allowances, and pension reforms for serving and retired government servants.\n\nNow, in case the 8th Pay Commission\u2019s rollout drags on, the central government employees are going to brace for a financial hit. While they are tentatively set to be paid from January 1, 2026, history shows that these are generally confined to basic pay alone.\n\nProminent allowances such as dearness allowance (DA), house rent allowance (HRA), and transport allowance (TPTA) rarely get backdated. This is an important distinction, as for lower and mid-level working staff, these allowances make up a meaningful chunk of their monthly earnings.\n\nThis is because the dearness allowance (DA) is revised every six months to help serving employees cope with rising inflation and lifestyle costs, regardless of whether a pay commission is active. That is why there is no \u2018gap\u2019 left to compensate for.\n\nHRAs pegged at 24%, 16%, and 8% of basic pay, primarily depending on the city category, rise only once DA crosses certain thresholds, as it did in January 2024. TPTA, on the other hand, is a fixed sum tied to DA and gets revised with every new pay commission. For these reasons, none of the three generally qualify for retroactive payment, unlike basic pay.\n\nThe 8th Pay Commission was constituted on 3 November 2025. Since then, it has been given an 18-month window from the November 2025 terms of reference to submit its final recommendations.", "source": "LiveMint Money", "pub_date_str": "29 Aug 2026, 11:59 AM IST", "pub_date_relative": "58m ago"}, {"title": "IPO fever grips D-Street: 3 issues to open for subscription; 8 new listings lined up for next week", "full_content": "Home ETPrime Markets Market Data Masterclass News Industry SME Politics Wealth MF Tech AI Careers Opinion NRI Panache More Menu Business News \u203a Markets \u203a IPOs/FPOs \u203a IPO fever grips D-Street: 3 issues to open for subscription; 8 new listings lined up for next week Unimech Aerospace and Manufacturing Share Price The Economic Times daily newspaper is available online now. Read Today's Paper IPO fever grips D-Street: 3 issues to open for subscription; 8 new listings lined up for next week SECTIONS IPO fever grips D-Street: 3 issues to open for subscription; 8 new listings lined up for next week By Kumar Gaurav , ETMarkets.com Last Updated: Aug 29, 2026, 12:21:00 PM IST Rate Story Follow us Share Font Size Abc Small Abc Medium Abc Large Save Print Comment Synopsis India\u2019s primary market is set for a busy week, with three mainboard IPOs opening to raise a combined Rs 1,264.72 crore. Meanwhile, eight companies are scheduled to list, including five that have completed their IPOs and three whose ongoing issues will close before their shares make their D-Street debut.\n\nListen Loading... \u00d7 \u00d7 Subscribe to Unlock AI Briefing and Premium Content\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram. For fastest news alerts on financial markets, investment strategies and stocks alerts, subscribe to our Telegram feeds .)\n\nSubscribe to ET Prime and read the Economic Times ePaper Online.and Sensex Today .\n\nTop Trending Stocks: SBI Share Price , Axis Bank Share Price , HDFC Bank Share Price , Infosys Share Price , Wipro Share Price , NTPC Share Price\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram.", "source": "Economic Times Markets", "pub_date_str": "29 Aug 2026, 11:58 AM IST", "pub_date_relative": "58m ago"}, {"title": "Sezzle director Kyle Brehm sells $125,920 in company stock", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 11:46 AM IST", "pub_date_relative": "1h ago"}, {"title": "Energy Vault director Stephanie Unwin sells $426,983 in shares", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 11:46 AM IST", "pub_date_relative": "1h ago"}, {"title": "McDonald's, KFC Among 10 Bengaluru Food Outlets Fined Upto Rs 25,000 Over Waste Violations", "full_content": "Bengaluru civic officials fined 10 food outlets at Nexus Mall, Koramangala, for mixing wet and dry waste and using banned single-use plastic. Fines ranged from Rs 5,000 to Rs 25,000, with repeat violations inviting stricter action.", "source": "NDTV Profit", "pub_date_str": "29 Aug 2026, 11:36 AM IST", "pub_date_relative": "1h ago"}, {"title": "German regional banks face strain as Volksbank Brawo troubles deepen", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 11:36 AM IST", "pub_date_relative": "1h ago"}, {"title": "Bengaluru's Peptide Party Cancelled A Day Before Event: Here's What Happened", "full_content": "A peptide party planned for August 29 in Bengaluru's Koramangala was cancelled after Karnataka FSDA's inquiry into the event and the peptide products involved.", "source": "NDTV Profit", "pub_date_str": "29 Aug 2026, 11:33 AM IST", "pub_date_relative": "1h ago"}], "cfa": [{"title": "Bitcoin stalls at $77,465 with bearish momentum: Live levels", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 12:32 PM IST", "pub_date_relative": "24m ago", "cfa_topics": ["Equity Investments", "Alternative Investments"], "exam_note": "Equity valuation methods and market mechanics are fundamental CFA exam areas."}, {"title": "Buy or sell stocks: Sumeet Bagadia recommends three shares to buy on Monday \u2014 31 August 2026", "full_content": "Buy or sell stocks for 31 August 2026: The Indian stock market ended the week on a cautious note, extending their recent corrective phase as concerns over global interest rates, geopolitical uncertainty, and volatility surrounding the new Closing Auction Session weighed on investor sentiment. Although markets recovered sharply on Friday, supported by strong buying in IT stocks following upbeat global technology cues, the benchmark indices remained under pressure for the third consecutive week.\n\nFor the week, the Nifty 50 index declined around 0.31% to close at 24,175.65, while the Sensex fell nearly 0.36% to settle at 77,264.51. In contrast, the broader market remained relatively resilient, with the Midcap and Smallcap indices gaining around 0.52% and 0.51%.\n\nSumeet Bagadia, Executive Director at Choice Broking, believes Indian stock market sentiment is cautious to positive as long as the Nifty 50 index trades above 23,900. He said that Nifty has an existing base at the 50-DEMA level (24,050) and the next strong base is in the 23,850-23,900 range. The Choice Broking expert predicted sharp selling pressure if the 50-stock index breaks decisively below 23,800.\n\nRegarding stocks to buy on Monday , Sumeet Bagadia recommended three shares to buy-or-sell on Monday: TCS, Axis Bank, and Bajaj Auto.\n\nTCS share price is showing signs of consolidation after a recent recovery, with the stock currently trading around \u20b9 2,342. The recent rally faced resistance near the 100-day EMA at \u20b9 2,361.60, where selling pressure emerged, keeping the stock below this key level.\n\nAxis Bank's share price is attempting to stabilise after a significant pullback from its recent highs, currently trading around \u20b9 1,265.", "source": "LiveMint Markets", "pub_date_str": "29 Aug 2026, 12:32 PM IST", "pub_date_relative": "24m ago", "cfa_topics": ["Equity Investments", "Portfolio Management"], "exam_note": "Equity valuation methods and market mechanics are fundamental CFA exam areas."}, {"title": "F&O Talk: Traders should maintain caution amid CAS volatility, says Sudeep Shah; picks 6 stocks for next week", "full_content": "Home ETPrime Markets Market Data Masterclass News Industry SME Politics Wealth MF Tech AI Careers Opinion NRI Panache More Menu Business News \u203a Markets \u203a Expert Views \u203a F&O Talk: Traders should maintain caution amid CAS volatility, says Sudeep Shah; picks 6 stocks for next week The Economic Times daily newspaper is available online now. Read Today's Paper F&O Talk: Traders should maintain caution amid CAS volatility, says Sudeep Shah; picks 6 stocks for next week SECTIONS F&O Talk: Traders should maintain caution amid CAS volatility, says Sudeep Shah; picks 6 stocks for next week By Veer Sharma , ETMarkets.com Last Updated: Aug 29, 2026, 12:35:00 PM IST Rate Story Follow us Share Font Size Abc Small Abc Medium Abc Large Save Print Comment Synopsis The Indian stock market ended higher on Friday, but heightened volatility and sharp index divergences amid the Closing Auction Session (CAS) have kept traders cautious. Technical analyst Sudeep Shah expects Nifty and Sensex to remain range-bound, while highlighting key support and resistance levels and identifying six stocks that could outperform in the coming week.\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram. For fastest news alerts on financial markets, investment strategies and stocks alerts, subscribe to our Telegram feeds .)\n\nSubscribe to ET Prime and read the Economic Times ePaper Online.and Sensex Today .\n\nTop Trending Stocks: SBI Share Price , Axis Bank Share Price , HDFC Bank Share Price , Infosys Share Price , Wipro Share Price , NTPC Share Price\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram.", "source": "Economic Times Markets", "pub_date_str": "29 Aug 2026, 12:32 PM IST", "pub_date_relative": "25m ago", "cfa_topics": ["Equity Investments"], "exam_note": "Equity valuation methods and market mechanics are fundamental CFA exam areas."}, {"title": "Bethlehem Kudumba Unit Box Office Collection Day 8: Nivin Pauly Starrer Sees Growth, Check Earnings", "full_content": "After a strong first week, 'Bethlehem Kudumba Unit' saw a 9.1% jump on Day 8, pushing its India net collection to Rs 61.85 crore and gross to Rs 72.15 crore.", "source": "NDTV Profit", "pub_date_str": "29 Aug 2026, 12:11 PM IST", "pub_date_relative": "46m ago", "cfa_topics": ["Financial Statement Analysis"], "exam_note": "Analyzing financial statements and ratios is the largest CFA L1 topic by weight."}, {"title": "Randy Shefman, Royal Gold SVP, sells $131,400 in common stock", "full_content": "", "source": "Investing.com News", "pub_date_str": "29 Aug 2026, 12:00 PM IST", "pub_date_relative": "56m ago", "cfa_topics": ["Alternative Investments"], "exam_note": "Alternative asset classes and their risk-return profiles are increasingly tested."}, {"title": "8th Pay Commission delay could cost lower-ranked staff up to \u20b93.45 lakh in lost HRA and transport allowance", "full_content": "The 8th Pay Commission panel is tentatively expected to submit its final report to the central government by May-June 2027. Once the final report is submitted, the government will decide on pay revisions, allowances, and pension reforms for serving and retired government servants.\n\nNow, in case the 8th Pay Commission\u2019s rollout drags on, the central government employees are going to brace for a financial hit. While they are tentatively set to be paid from January 1, 2026, history shows that these are generally confined to basic pay alone.\n\nProminent allowances such as dearness allowance (DA), house rent allowance (HRA), and transport allowance (TPTA) rarely get backdated. This is an important distinction, as for lower and mid-level working staff, these allowances make up a meaningful chunk of their monthly earnings.\n\nThis is because the dearness allowance (DA) is revised every six months to help serving employees cope with rising inflation and lifestyle costs, regardless of whether a pay commission is active. That is why there is no \u2018gap\u2019 left to compensate for.\n\nHRAs pegged at 24%, 16%, and 8% of basic pay, primarily depending on the city category, rise only once DA crosses certain thresholds, as it did in January 2024. TPTA, on the other hand, is a fixed sum tied to DA and gets revised with every new pay commission. For these reasons, none of the three generally qualify for retroactive payment, unlike basic pay.\n\nThe 8th Pay Commission was constituted on 3 November 2025. Since then, it has been given an 18-month window from the November 2025 terms of reference to submit its final recommendations.", "source": "LiveMint Money", "pub_date_str": "29 Aug 2026, 11:59 AM IST", "pub_date_relative": "58m ago", "cfa_topics": ["Economics", "Financial Statement Analysis", "Portfolio Management"], "exam_note": "Understand how macroeconomic indicators and policy decisions affect markets \u2014 a core CFA economics topic."}, {"title": "IPO fever grips D-Street: 3 issues to open for subscription; 8 new listings lined up for next week", "full_content": "Home ETPrime Markets Market Data Masterclass News Industry SME Politics Wealth MF Tech AI Careers Opinion NRI Panache More Menu Business News \u203a Markets \u203a IPOs/FPOs \u203a IPO fever grips D-Street: 3 issues to open for subscription; 8 new listings lined up for next week Unimech Aerospace and Manufacturing Share Price The Economic Times daily newspaper is available online now. Read Today's Paper IPO fever grips D-Street: 3 issues to open for subscription; 8 new listings lined up for next week SECTIONS IPO fever grips D-Street: 3 issues to open for subscription; 8 new listings lined up for next week By Kumar Gaurav , ETMarkets.com Last Updated: Aug 29, 2026, 12:21:00 PM IST Rate Story Follow us Share Font Size Abc Small Abc Medium Abc Large Save Print Comment Synopsis India\u2019s primary market is set for a busy week, with three mainboard IPOs opening to raise a combined Rs 1,264.72 crore. Meanwhile, eight companies are scheduled to list, including five that have completed their IPOs and three whose ongoing issues will close before their shares make their D-Street debut.\n\nListen Loading... \u00d7 \u00d7 Subscribe to Unlock AI Briefing and Premium Content\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram. For fastest news alerts on financial markets, investment strategies and stocks alerts, subscribe to our Telegram feeds .)\n\nSubscribe to ET Prime and read the Economic Times ePaper Online.and Sensex Today .\n\nTop Trending Stocks: SBI Share Price , Axis Bank Share Price , HDFC Bank Share Price , Infosys Share Price , Wipro Share Price , NTPC Share Price\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram.", "source": "Economic Times Markets", "pub_date_str": "29 Aug 2026, 11:58 AM IST", "pub_date_relative": "58m ago", "cfa_topics": ["Corporate Issuers", "Equity Investments"], "exam_note": "Corporate finance decisions (capital structure, dividends, M&A) are core exam material."}, {"title": "RBI rate hike risk rises: Bandhan AMC\u2019s Suyash Choudhary dials back duration in bond portfolios", "full_content": "Home ETPrime Markets Market Data Masterclass News Industry SME Politics Wealth MF Tech AI Careers Opinion NRI Panache More Menu Business News \u203a Markets \u203a Bonds \u203a RBI rate hike risk rises: Bandhan AMC\u2019s Suyash Choudhary dials back duration in bond portfolios Powered By The Economic Times daily newspaper is available online now. Read Today's Paper RBI rate hike risk rises: Bandhan AMC\u2019s Suyash Choudhary dials back duration in bond portfolios SECTIONS RBI rate hike risk rises: Bandhan AMC\u2019s Suyash Choudhary dials back duration in bond portfolios By Kshitij Anand , ETMarkets.com Last Updated: Aug 29, 2026, 11:24:00 AM IST Rate Story Follow us Share Font Size Abc Small Abc Medium Abc Large Save Print Comment Synopsis Bandhan AMC has reduced duration across several bond funds as RBI rate hike risks rise following the latest MPC minutes. CIO Suyash Choudhary said markets are increasingly debating the timing and magnitude of potential hikes, while fading FCNR flows and changing policy expectations could drive a flatter bond yield curve.\n\nListen Loading... \u00d7 \u00d7 Subscribe to Unlock AI Briefing and Premium Content\n\nBandhan AMC has reduced duration across several bond funds as RBI rate hike risks rise following the latest MPC minutes. CIO Suyash Choudhary said markets are increasingly debating the timing and magnitude of potential hikes, while fading FCNR flows and changing policy expectations could drive a flatter bond yield curve.\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram.", "source": "Economic Times Markets", "pub_date_str": "29 Aug 2026, 11:24 AM IST", "pub_date_relative": "1h ago", "cfa_topics": ["Economics", "Equity Investments", "Fixed Income"], "exam_note": "Understand how macroeconomic indicators and policy decisions affect markets \u2014 a core CFA economics topic."}, {"title": "Indian bank stocks show widest exchange price gap in decades", "full_content": "Home ETPrime Markets Market Data Masterclass News Industry SME Politics Wealth MF Tech AI Careers Opinion NRI Panache More Menu Business News \u203a Markets \u203a Stocks \u203a News \u203a Indian bank stocks show widest exchange price gap in decades BSE Share Price Multi Commodity Exchange of India Share Price Indian Energy Exchange Share Price The Economic Times daily newspaper is available online now. Read Today's Paper Indian bank stocks show widest exchange price gap in decades SECTIONS Indian bank stocks show widest exchange price gap in decades Bloomberg Last Updated: Aug 29, 2026, 11:47:00 AM IST Rate Story Follow us Share Font Size Abc Small Abc Medium Abc Large Save Print Comment Synopsis Indian bank stocks saw unusually wide price gaps between the NSE and BSE during Thursday\u2019s closing auction, with IndusInd Bank recording its widest exchange price difference in more than two decades. The divergence has intensified scrutiny of the new auction system amid thin liquidity, monthly expiry pressures and concerns over market manipulation.\n\nListen Loading... \u00d7 \u00d7 Subscribe to Unlock AI Briefing and Premium Content\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram. For fastest news alerts on financial markets, investment strategies and stocks alerts, subscribe to our Telegram feeds .)\n\nSubscribe to ET Prime and read the Economic Times ePaper Online.and Sensex Today .\n\nTop Trending Stocks: SBI Share Price , Axis Bank Share Price , HDFC Bank Share Price , Infosys Share Price , Wipro Share Price , NTPC Share Price\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram.", "source": "Economic Times Markets", "pub_date_str": "29 Aug 2026, 11:16 AM IST", "pub_date_relative": "1h ago", "cfa_topics": ["Equity Investments", "Derivatives", "Alternative Investments", "Ethical & Professional Standards"], "exam_note": "Equity valuation methods and market mechanics are fundamental CFA exam areas."}, {"title": "Expert view: FPIs turn positive on India | OmniScience Capital CEO sees non-AI diversification boosting inflows", "full_content": "Expert view: As foreign portfolio investors (FPIs) have turned net buyers of Indian equities since July this year, Vikas Gupta, CEO and Strategist at OmniScience Capital, believes non-AI diversification could drive more FPI inflows to India. In an interview with Mint, Gupta said a spike in inflation will prompt the US Federal Reserve to hike rates, but the most likely course for the US Fed is to hold rates steady, given the balance between job growth and inflation. Edited excerpts:\n\nBased on the consistent July and August inflows, it looks like the beginning of a sentiment turnaround for FPIs . Most likely, this could be an initial exploration of allocating to the non-AI assets to balance or hedge their portfolios.\n\nIn the emerging market index, Taiwan and South Korea have higher allocations compared to their long-term weights. Even if that continues, India is likely to start getting more allocations from the non-AI diversification allocations.\n\nIf inflation spikes in the US, the interest rates are bound to increase. However, it is not a given. CPI/PCE seem to be stabilising, but remains above 3%, significantly above the Fed's 2% mandate.\n\nThe jobs data also show a decline in payrolls, which biases the market towards a rate cut. Given the balancing between job growth and inflation, the most likely course for the Fed is to hold the rates steady.\n\nThe Japanese central bank has to raise interest rates to safeguard and bolster the currency and avoid further import-driven inflation from oil and food imports.\n\nThe US is also trying to cooperate with Japan in its endeavour. However, the global energy, commodities, and food situation appears inflationary in the near term due to the various wars disrupting global trade.\n\nFurther, the huge AI capex also seems to be boosting the cost of capital. Finally, the pace of US Government debt at $1 trillion per quarter, which is pushing it toward $40 trillion, is also alarming bond markets.", "source": "LiveMint Markets", "pub_date_str": "29 Aug 2026, 11:10 AM IST", "pub_date_relative": "1h ago", "cfa_topics": ["Economics", "Corporate Issuers", "Fixed Income", "Portfolio Management"], "exam_note": "Understand how macroeconomic indicators and policy decisions affect markets \u2014 a core CFA economics topic."}, {"title": "Stocks to buy under \u20b9100: Vaishali Parekh recommends three stocks to buy or sell", "full_content": "Stocks to buy under \u20b9 100: The key benchmark of the Indian stock market remained volatile during the week and continued to trade within a broadly range-bound structure. The Nifty 50 extended its losing streak to three consecutive weeks. Market sentiment remained cautious amid elevated geopolitical uncertainty, fluctuations in crude oil prices and concerns surrounding the US monetary policy outlook. Although the IT sector provided strong support towards the end of the week following robust Nvidia earnings, weakness in several large-cap stocks limited the broader recovery.\n\nInstitutional flows remained mixed during the week, with FIIs turning aggressive sellers on Friday and recording net outflows of around \u20b9 5,040 crore. However, the selling pressure was largely countered by strong DII participation, with domestic institutions recording purchases of approximately \u20b9 5,184 crore, providing a cushion to the market.\n\nOn a month-to-date (MTD) basis, FIIs continue to remain marginal net buyers at around \u20b9 454 crore, marking a notable shift after several months of sustained foreign selling. Meanwhile, DIIs have maintained strong buying momentum, with MTD inflows of approximately \u20b9 79,620 crore. The continued strength in domestic institutional participation remains an important stabilising factor and has helped limit the impact of foreign selling and prevent a sharper decline in the broader market.\n\nVaishali Parekh, Vice President \u2014 Technical Research at Prabhudas Lilladher, believes the Indian stock market bias is cautiously positive.", "source": "LiveMint Markets", "pub_date_str": "29 Aug 2026, 11:05 AM IST", "pub_date_relative": "1h ago", "cfa_topics": ["Economics", "Financial Statement Analysis", "Equity Investments", "Alternative Investments", "Portfolio Management"], "exam_note": "Understand how macroeconomic indicators and policy decisions affect markets \u2014 a core CFA economics topic."}, {"title": "Concurrent Gainers: 13 smallcap stocks that gain for 5 days in a row, surge up to 45%", "full_content": "Home ETPrime Markets Market Data Masterclass News Industry SME Politics Wealth MF Tech AI Careers Opinion NRI Panache More Menu Business News \u203a Markets \u203a Stocks \u203a News Concurrent Gainers: 13 smallcap stocks that gain for 5 days in a row, surge up to 45% Written by Ritesh Presswala , ETMarkets.com | Aug 29, 2026, 11:33:25 AM IST 1 / 14 Consistent gainers Over the five trading sessions ending August 28, the Sensex benchmark declined 0.36%, or 276 points, to close at 77,264, falling in three of the five sessions. Despite the broader market decline, around 35 stocks from the BSE SmallCap index advanced in each of the five consecutive sessions between August 24 and 28. Of these, 13 smallcap stocks posted gains on all five days, delivering cumulative returns of between 10% and 45% during the period. (Data Source: ACE Equity)", "source": "Economic Times Markets", "pub_date_str": "29 Aug 2026, 10:57 AM IST", "pub_date_relative": "1h ago", "cfa_topics": ["Equity Investments", "Portfolio Management"], "exam_note": "Equity valuation methods and market mechanics are fundamental CFA exam areas."}, {"title": "Bajaj Finance, L&T Finance poised to benefit as NBFC earnings recovery broadens: Siddhartha Khemka", "full_content": "Home ETPrime Markets Market Data Masterclass News Industry SME Politics Wealth MF Tech AI Careers Opinion NRI Panache More Menu Business News \u203a Markets \u203a Stocks \u203a News \u203a Bajaj Finance, L&T Finance poised to benefit as NBFC earnings recovery broadens: Siddhartha Khemka Bajaj Finance Share Price Mahindra & Mahindra Financial Services Share Price The Economic Times daily newspaper is available online now. Read Today's Paper Bajaj Finance, L&T Finance poised to benefit as NBFC earnings recovery broadens: Siddhartha Khemka SECTIONS Bajaj Finance, L&T Finance poised to benefit as NBFC earnings recovery broadens: Siddhartha Khemka By Siddhartha Khemka , ET CONTRIBUTORS Last Updated: Aug 29, 2026, 10:44:00 AM IST Rate Story Follow us Share Font Size Abc Small Abc Medium Abc Large Save Print Comment Synopsis India\u2019s NBFC sector is showing signs of a broad-based cyclical recovery, with FY27 first-quarter results pointing to stronger loan growth, improving asset quality, lower credit costs and emerging operating leverage. Earnings estimates are also being upgraded, raising expectations of sustained profitability and a potential valuation re-rating across leading lenders.\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram. For fastest news alerts on financial markets, investment strategies and stocks alerts, subscribe to our Telegram feeds .)\n\nSubscribe to ET Prime and read the Economic Times ePaper Online.and Sensex Today .\n\nTop Trending Stocks: SBI Share Price , Axis Bank Share Price , HDFC Bank Share Price , Infosys Share Price , Wipro Share Price , NTPC Share Price\n\n(What's moving Sensex and Nifty Track latest market news , stock tips , Budget 2025 , Share Market on Budget 2025 and expert advice , on ETMarkets . Also, ETMarkets.com is now on Telegram.", "source": "Economic Times Markets", "pub_date_str": "29 Aug 2026, 10:44 AM IST", "pub_date_relative": "2h ago", "cfa_topics": ["Financial Statement Analysis", "Corporate Issuers", "Equity Investments"], "exam_note": "Analyzing financial statements and ratios is the largest CFA L1 topic by weight."}, {"title": "Budget 2027: Finance Ministry sets October 12 for pre-Budget meetings, seeks spending and revenue plans", "full_content": "Home ETPrime Markets Market Data Masterclass News Industry SME Politics Wealth MF Tech AI Careers Opinion NRI Panache More Menu Business News \u203a News \u203a Economy \u203a Policy \u203a Budget 2027: Finance Ministry sets October 12 for pre-Budget meetings, seeks spending and revenue plans The Economic Times daily newspaper is available online now. Read Today's Paper Budget 2027: Finance Ministry sets October 12 for pre-Budget meetings, seeks spending and revenue plans SECTIONS Budget 2027: Finance Ministry sets October 12 for pre-Budget meetings, seeks spending and revenue plans ET Online Last Updated: Aug 29, 2026, 10:41:00 AM IST Rate Story Follow us Share Font Size Abc Small Abc Medium Abc Large Save Print Comment Synopsis As the 2027-28 Union Budget approaches, central ministries are tasked with crafting practical fiscal estimates. The Finance Ministry emphasizes the importance of controlling expenditures and increasing revenue. Pre-Budget meetings, starting in October 2026, will focus on refining these estimates. Ministries are advised to prioritize funding for ongoing projects before introducing new schemes, while also working to boost non-tax revenue and evaluate current programs.\n\nBehind the sugar price drop: Exports, imports and a non-factor called ethanol\n\nAs IndiGo, Air India scramble for pilots, fresh headwinds hit hard\n\nWhen a CFO resigns, is \u2018personal reasons\u2019 explanation enough?\n\nFCNR (B) scheme garners USD65 bn, but why isn't the rupee gaining?\n\nET Prime special: Bigger, Better or Both? Understanding business to figure out the mystery: Power Grid Corp \u2013 Part 1\n\nChoose your reason below and click on the Report button. This will alert our moderators to take action\n\n15 Days Free: Unlock All ETPrime Exclusives, Market Tools & ePapers", "source": "Economic Times Economy", "pub_date_str": "29 Aug 2026, 10:41 AM IST", "pub_date_relative": "2h ago", "cfa_topics": ["Financial Statement Analysis"], "exam_note": "Analyzing financial statements and ratios is the largest CFA L1 topic by weight."}, {"title": "BSE, Hindustan Zinc among 5 stocks with revenue growth of up to 64% in 1 year. Check details", "full_content": "Home ETPrime Markets Market Data Masterclass News Industry SME Politics Wealth MF Tech AI Careers Opinion NRI Panache More Menu Business News \u203a Markets \u203a Stocks \u203a News BSE, Hindustan Zinc among 5 stocks with revenue growth of up to 64% in 1 year. Check details Written by Surbhi Khanna , ET Online | Aug 29, 2026, 10:53:48 AM IST 1 / 6 Revenue growth Five key stocks, including BSE and Muthoot Finance, recorded strong revenue growth over the past year, with gains of up to 64%. Here is the detailed breakdown, based on data reported by ET Wealth as of August 20, 2026.\n\nBSE recorded a 64.2% increase in revenue over the past year. Net profit grew 76%, and the stock carries a five-star rating from Value Research.\n\nMuthoot Finance reported 50.7% revenue growth over the past year, while net profit increased 85%. The stock carries a five-star rating from Value Research.\n\nHindustan Zinc witnessed a revenue growth of 38.9% in the last one year. Net profit grew 67%, and Value Research assigned the stock a five-star rating.\n\nPolycab India witnessed a revenue growth of 32.1% in the last one year. Net profit grew 29%, and Value Research assigned the stock a five-star rating.\n\nBLS International Services witnessed a revenue growth of 31.8% in the last year. Net profit grew 25%, and Value Research assigned the stock a five-star rating.", "source": "Economic Times Markets", "pub_date_str": "29 Aug 2026, 10:37 AM IST", "pub_date_relative": "2h ago", "cfa_topics": ["Financial Statement Analysis", "Equity Investments"], "exam_note": "Analyzing financial statements and ratios is the largest CFA L1 topic by weight."}, {"title": "Who Is Sandhya Devanathan? What To Know About OpenAI's New Asia-Pacific Leader", "full_content": "Meta\u2019s Sandhya Devanathan is joining OpenAI as VP for Southeast Asia and Australia. Based in Singapore, she will lead regional growth, enterprise adoption, partnerships and regulatory engagement as OpenAI expands across Asia-Pacific.", "source": "NDTV Profit", "pub_date_str": "29 Aug 2026, 10:32 AM IST", "pub_date_relative": "2h ago", "cfa_topics": ["Ethical & Professional Standards"], "exam_note": "Ethics cases and the Code of Conduct are tested heavily \u2014 always the first exam topic."}, {"title": "India wants global factories, but its own quality checks may be putting investors off: GTRI", "full_content": "Concerns have surfaced among Japanese enterprises regarding India's compulsory BIS certification rules. A newly released study proposes a significant revamp of the QCO framework. The existing regulations are leading to considerable delays and inflated compliance costs for manufacturers, adversely impacting smaller businesses in India and disrupting supply chains. Experts recommend implementing a risk-based regulatory framework to modernize and simplify quality control processes.", "source": "Economic Times Economy", "pub_date_str": "29 Aug 2026, 10:30 AM IST", "pub_date_relative": "2h ago", "cfa_topics": ["Ethical & Professional Standards"], "exam_note": "Ethics cases and the Code of Conduct are tested heavily \u2014 always the first exam topic."}, {"title": "SIP inflows surge, but small savers shrink: What the latest data reveals", "full_content": "Over the past financial year, the number of accounts contributing between \u20b9500 and \u20b91,000 fell by nearly 1.4 million\u2014the first decline in years.", "source": "LiveMint Money", "pub_date_str": "29 Aug 2026, 10:30 AM IST", "pub_date_relative": "2h ago", "cfa_topics": ["Portfolio Management"], "exam_note": "Asset allocation and portfolio construction concepts appear throughout the CFA curriculum."}, {"title": "Crude oil prices end winning run with first weekly fall in nearly a month. Can liquid gold slide further?", "full_content": "Crude oil prices posted their first weekly decline in three weeks as improving flows through the Strait of Hormuz eased supply concerns. Brent fell over 5% for the week, while WTI declined more than 4%. However, prolonged shipping disruptions could push prices higher, with JPMorgan and Goldman Sachs flagging upside risks.", "source": "Economic Times Markets", "pub_date_str": "29 Aug 2026, 10:22 AM IST", "pub_date_relative": "2h ago", "cfa_topics": ["Alternative Investments"], "exam_note": "Alternative asset classes and their risk-return profiles are increasingly tested."}, {"title": "OpenAI Ends Partnership With Cursor After SpaceX Acquisition. Here's What Happened", "full_content": "OpenAI has notified SpaceX that it intends to end its Cursor agreement, citing concerns over how its technology may be used following the acquisition", "source": "NDTV Profit", "pub_date_str": "29 Aug 2026, 10:16 AM IST", "pub_date_relative": "2h ago", "cfa_topics": ["Corporate Issuers"], "exam_note": "Corporate finance decisions (capital structure, dividends, M&A) are core exam material."}], "updated_at": "29 Aug 2026, 12:57 PM IST", "total_stories": 388};
+    let activeFilter = "All";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (!allData || !allData.updated_at) {
+            document.getElementById("general-feed").innerHTML = '<div class="empty-state">Data could not be loaded.</div>';
+            return;
+        }
+        renderAll();
+    });
+
+    function renderAll() {
+        document.getElementById("dateline").textContent = allData.updated_at;
+        document.getElementById("stat-stories").textContent = allData.total_stories + " stories";
+        document.getElementById("count-general").textContent = "(" + allData.general.length + ")";
+        document.getElementById("count-cfa").textContent = "(" + allData.cfa.length + ")";
+
+        document.getElementById("general-feed").innerHTML = allData.general.length
+            ? allData.general.map((s, i) => storyHTML(s, i + 1, false)).join("")
+            : '<div class="empty-state">No stories available.</div>';
+
+        renderFilters();
+        renderCFA();
+    }
+
+    function storyHTML(s, num, showCFA) {
+        const id = "s" + num + (showCFA ? "c" : "g");
+        const content = s.full_content || "";
+        const isLong = content.length > 400;
+
+        let h = `<article class="story">
+            <div class="story-meta-line">
+                <span class="story-number">${num}</span>
+                <span class="story-source-name">${esc(s.source)}</span>
+                <span class="story-dot"></span>
+                <span class="story-time-label">${esc(s.pub_date_str)}</span>
+                ${s.pub_date_relative ? `<span class="story-dot"></span><span class="story-time-ago">${esc(s.pub_date_relative)}</span>` : ""}
+            </div>
+            <div class="story-headline">${esc(s.title)}</div>`;
+
+        if (content) {
+            h += `<div class="story-body ${isLong ? 'collapsed' : ''}" id="${id}">${esc(content)}</div>`;
+            if (isLong) {
+                h += `<button class="read-toggle" onclick="toggle('${id}',this)">▾ Continue reading</button>`;
+            }
+        }
+
+        if (showCFA && s.cfa_topics && s.cfa_topics.length) {
+            h += `<div class="cfa-block">
+                <div class="cfa-label">CFA L1 Topics</div>
+                <div class="cfa-tag-row">`;
+            s.cfa_topics.forEach(t => { h += `<span class="cfa-tag">${esc(t)}</span>`; });
+            h += `</div>`;
+            if (s.exam_note) {
+                h += `<div class="exam-note"><strong>Exam relevance —</strong> ${esc(s.exam_note)}</div>`;
+            }
+            h += `</div>`;
+        }
+
+        h += `</article>`;
+        return h;
+    }
+
+    function toggle(id, btn) {
+        const el = document.getElementById(id);
+        if (el.classList.contains("collapsed")) {
+            el.classList.remove("collapsed");
+            btn.textContent = "▴ Show less";
+        } else {
+            el.classList.add("collapsed");
+            btn.textContent = "▾ Continue reading";
+        }
+    }
+
+    function renderFilters() {
+        const topics = new Set();
+        allData.cfa.forEach(s => s.cfa_topics.forEach(t => topics.add(t)));
+        const sorted = ["All", ...Array.from(topics).sort()];
+        document.getElementById("cfa-filters").innerHTML = sorted.map(t =>
+            `<button class="filter-btn ${t === activeFilter ? 'active' : ''}" onclick="filterCFA('${esc(t)}')">${esc(t)}</button>`
+        ).join("");
+    }
+
+    function renderCFA() {
+        let stories = allData.cfa;
+        if (activeFilter !== "All") stories = stories.filter(s => s.cfa_topics.includes(activeFilter));
+        document.getElementById("cfa-feed").innerHTML = stories.length
+            ? stories.map((s, i) => storyHTML(s, i + 1, true)).join("")
+            : '<div class="empty-state">No stories match this filter.</div>';
+    }
+
+    function filterCFA(t) { activeFilter = t; renderFilters(); renderCFA(); }
+
+    function switchTab(tab) {
+        document.querySelectorAll(".nav-tab").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
+        document.querySelectorAll(".feed-section").forEach(s => s.classList.toggle("active", s.id === "section-" + tab));
+    }
+
+    function esc(s) { if (!s) return ""; const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+</script>
+
+</body>
+</html>

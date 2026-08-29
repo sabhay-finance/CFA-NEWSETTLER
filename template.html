@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFA SETTLER</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #d4d4d4;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: #333; color: #fff; }
+
+        /* ═══ MASTHEAD ═══ */
+        .masthead {
+            border-bottom: 3px double #333;
+            padding: 36px 0 20px;
+            text-align: center;
+        }
+
+        .masthead-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .dateline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .masthead h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .masthead-sub {
+            font-size: 0.82rem;
+            color: #555;
+            margin-top: 10px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .masthead-rule {
+            width: 60px;
+            height: 1px;
+            background: #333;
+            margin: 16px auto 0;
+        }
+
+        /* ═══ NAV ═══ */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .nav-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-tabs { display: flex; gap: 0; }
+
+        .nav-tab {
+            background: none; border: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #555;
+            padding: 14px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-tab:hover { color: #888; }
+        .nav-tab.active { color: #fff; border-bottom-color: #fff; }
+
+        .nav-tab .count {
+            font-size: 0.65rem;
+            color: #444;
+            margin-left: 4px;
+        }
+        .nav-tab.active .count { color: #666; }
+
+        .nav-actions {
+            display: flex; align-items: center; gap: 16px;
+        }
+
+        .nav-stat {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem; color: #444;
+        }
+
+        /* ═══ CONTENT ═══ */
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .feed-section { display: none; padding: 32px 0 60px; }
+        .feed-section.active { display: block; }
+
+        /* ═══ SECTION HEADER ═══ */
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #444;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #1a1a1a;
+            margin-bottom: 28px;
+        }
+
+        /* ═══ STORY — NEWSPAPER STYLE ═══ */
+        .story {
+            padding-bottom: 28px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid #141414;
+        }
+
+        .story:last-child { border-bottom: none; }
+
+        .story-meta-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .story-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #222;
+            line-height: 1;
+            min-width: 28px;
+        }
+
+        .story-source-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #444;
+        }
+
+        .story-time-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: #333;
+        }
+
+        .story-time-ago {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .story-dot {
+            width: 3px; height: 3px;
+            border-radius: 50%;
+            background: #333;
+        }
+
+        .story-headline {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.35;
+            color: #eee;
+            margin-bottom: 14px;
+            letter-spacing: -0.3px;
+        }
+
+        .story-body {
+            font-size: 0.88rem;
+            color: #888;
+            line-height: 1.85;
+            white-space: pre-line;
+        }
+
+        .story-body.collapsed {
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-toggle {
+            background: none; border: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #555;
+            cursor: pointer;
+            padding: 8px 0 0;
+            transition: color 0.15s;
+        }
+        .read-toggle:hover { color: #aaa; }
+
+        /* ═══ CFA TAGS ═══ */
+        .cfa-block {
+            margin-top: 16px;
+            padding: 16px 0 0;
+            border-top: 1px solid #141414;
+        }
+
+        .cfa-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .cfa-tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+
+        .cfa-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem; font-weight: 600;
+            padding: 4px 12px;
+            border: 1px solid #2a2a2a;
+            color: #777;
+            letter-spacing: 0.5px;
+        }
+
+        .exam-note {
+            font-size: 0.8rem;
+            color: #555;
+            font-style: italic;
+            padding-left: 14px;
+            border-left: 2px solid #222;
+            line-height: 1.6;
+        }
+        .exam-note strong { color: #777; font-style: normal; font-weight: 600; }
+
+        /* ═══ FILTER BAR ═══ */
+        .filter-bar {
+            display: flex; flex-wrap: wrap; gap: 6px;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .filter-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; font-weight: 500;
+            letter-spacing: 1px; text-transform: uppercase;
+            padding: 5px 12px;
+            border: 1px solid #1a1a1a;
+            background: transparent;
+            color: #444; cursor: pointer;
+            transition: all 0.15s;
+        }
+        .filter-btn:hover { border-color: #333; color: #777; }
+        .filter-btn.active { border-color: #555; color: #ccc; background: #111; }
+
+        /* ═══ EMPTY ═══ */
+        .empty-state {
+            text-align: center; padding: 60px 20px;
+            color: #333; font-size: 0.85rem;
+        }
+
+        /* ═══ FOOTER ═══ */
+        footer {
+            text-align: center;
+            padding: 28px 20px;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        footer p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; color: #2a2a2a;
+            letter-spacing: 1px; text-transform: uppercase;
+            line-height: 2;
+        }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 700px) {
+            .masthead h1 { font-size: 2rem; }
+            .nav-inner { flex-direction: column; gap: 8px; padding: 8px 24px; }
+            .story-headline { font-size: 1.2rem; }
+            .story-meta-line { flex-wrap: wrap; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ MASTHEAD ═══ -->
+    <div class="masthead">
+        <div class="masthead-inner">
+            <div class="dateline" id="dateline">loading...</div>
+            <h1>CFA SETTLER</h1>
+            <div class="masthead-sub">Markets · Economics · CFA Level 1 Digest</div>
+            <div class="masthead-rule"></div>
+        </div>
+    </div>
+
+    <!-- ═══ NAV ═══ -->
+    <div class="nav-bar">
+        <div class="nav-inner">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="general" onclick="switchTab('general')">
+                    General Feed <span class="count" id="count-general"></span>
+                </button>
+                <button class="nav-tab" data-tab="cfa" onclick="switchTab('cfa')">
+                    CFA Exam Feed <span class="count" id="count-cfa"></span>
+                </button>
+            </div>
+            <div class="nav-actions">
+                <span class="nav-stat" id="stat-stories"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ═══ GENERAL ═══ -->
+        <div class="feed-section active" id="section-general">
+            <div class="section-label">Top stories — Global & Indian markets</div>
+            <div id="general-feed"></div>
+        </div>
+
+        <!-- ═══ CFA ═══ -->
+        <div class="feed-section" id="section-cfa">
+            <div class="section-label">Stories tagged by CFA Level 1 curriculum</div>
+            <div class="filter-bar" id="cfa-filters"></div>
+            <div id="cfa-feed"></div>
+        </div>
+
+        <footer>
+            <p>CFA Settler · Auto-updated by GitHub Actions · IST (UTC+5:30) · Not financial advice</p>
+        </footer>
+    </div>
+
+<script>
+    // This variable will be injected during the build process
+    const allData = __NEWS_DATA_PLACEHOLDER__;
+    let activeFilter = "All";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (!allData || !allData.updated_at) {
+            document.getElementById("general-feed").innerHTML = '<div class="empty-state">Data could not be loaded.</div>';
+            return;
+        }
+        renderAll();
+    });
+
+    function renderAll() {
+        document.getElementById("dateline").textContent = allData.updated_at;
+        document.getElementById("stat-stories").textContent = allData.total_stories + " stories";
+        document.getElementById("count-general").textContent = "(" + allData.general.length + ")";
+        document.getElementById("count-cfa").textContent = "(" + allData.cfa.length + ")";
+
+        document.getElementById("general-feed").innerHTML = allData.general.length
+            ? allData.general.map((s, i) => storyHTML(s, i + 1, false)).join("")
+            : '<div class="empty-state">No stories available.</div>';
+
+        renderFilters();
+        renderCFA();
+    }
+
+    function storyHTML(s, num, showCFA) {
+        const id = "s" + num + (showCFA ? "c" : "g");
+        const content = s.full_content || "";
+        const isLong = content.length > 400;
+
+        let h = `<article class="story">
+            <div class="story-meta-line">
+                <span class="story-number">${num}</span>
+                <span class="story-source-name">${esc(s.source)}</span>
+                <span class="story-dot"></span>
+                <span class="story-time-label">${esc(s.pub_date_str)}</span>
+                ${s.pub_date_relative ? `<span class="story-dot"></span><span class="story-time-ago">${esc(s.pub_date_relative)}</span>` : ""}
+            </div>
+            <div class="story-headline">${esc(s.title)}</div>`;
+
+        if (content) {
+            h += `<div class="story-body ${isLong ? 'collapsed' : ''}" id="${id}">${esc(content)}</div>`;
+            if (isLong) {
+                h += `<button class="read-toggle" onclick="toggle('${id}',this)">▾ Continue reading</button>`;
+            }
+        }
+
+        if (showCFA && s.cfa_topics && s.cfa_topics.length) {
+            h += `<div class="cfa-block">
+                <div class="cfa-label">CFA L1 Topics</div>
+                <div class="cfa-tag-row">`;
+            s.cfa_topics.forEach(t => { h += `<span class="cfa-tag">${esc(t)}</span>`; });
+            h += `</div>`;
+            if (s.exam_note) {
+                h += `<div class="exam-note"><strong>Exam relevance —</strong> ${esc(s.exam_note)}</div>`;
+            }
+            h += `</div>`;
+        }
+
+        h += `</article>`;
+        return h;
+    }
+
+    function toggle(id, btn) {
+        const el = document.getElementById(id);
+        if (el.classList.contains("collapsed")) {
+            el.classList.remove("collapsed");
+            btn.textContent = "▴ Show less";
+        } else {
+            el.classList.add("collapsed");
+            btn.textContent = "▾ Continue reading";
+        }
+    }
+
+    function renderFilters() {
+        const topics = new Set();
+        allData.cfa.forEach(s => s.cfa_topics.forEach(t => topics.add(t)));
+        const sorted = ["All", ...Array.from(topics).sort()];
+        document.getElementById("cfa-filters").innerHTML = sorted.map(t =>
+            `<button class="filter-btn ${t === activeFilter ? 'active' : ''}" onclick="filterCFA('${esc(t)}')">${esc(t)}</button>`
+        ).join("");
+    }
+
+    function renderCFA() {
+        let stories = allData.cfa;
+        if (activeFilter !== "All") stories = stories.filter(s => s.cfa_topics.includes(activeFilter));
+        document.getElementById("cfa-feed").innerHTML = stories.length
+            ? stories.map((s, i) => storyHTML(s, i + 1, true)).join("")
+            : '<div class="empty-state">No stories match this filter.</div>';
+    }
+
+    function filterCFA(t) { activeFilter = t; renderFilters(); renderCFA(); }
+
+    function switchTab(tab) {
+        document.querySelectorAll(".nav-tab").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
+        document.querySelectorAll(".feed-section").forEach(s => s.classList.toggle("active", s.id === "section-" + tab));
+    }
+
+    function esc(s) { if (!s) return ""; const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+</script>
+
+</body>
+</html>
