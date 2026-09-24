@@ -1,0 +1,42 @@
+name: Auto-Publish Substack Article Every Hour
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish-substack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch fresh news & publish to Substack
+        env:
+          SUBSTACK_SID: ${{ secrets.SUBSTACK_SID }}
+          SUBSTACK_USER_ID: "553067075"
+          SUBSTACK_SUBDOMAIN: "sabhay1"
+          SUBSTACK_SEND_EMAIL: "false"
+        run: |
+          python build.py
+          python publish_substack.py --run-once
+
+      - name: Commit updated history and archive
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/published_history.json archive/ index.html || true
+          git diff --cached --quiet || git commit -m "🗞️ Substack auto-publish update [skip ci]"
+          git push || true
