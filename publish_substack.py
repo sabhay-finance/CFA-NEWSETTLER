@@ -47,7 +47,7 @@ if ENV_FILE.exists():
 SUBSTACK_SUBDOMAIN = os.getenv("SUBSTACK_SUBDOMAIN", "sabhay1")
 SUBSTACK_BASE_URL = f"https://{SUBSTACK_SUBDOMAIN}.substack.com"
 SUBSTACK_USER_ID = int(os.getenv("SUBSTACK_USER_ID", "553067075"))
-SUBSTACK_SID = os.getenv("SUBSTACK_SID", "")
+SUBSTACK_SID = os.getenv("SUBSTACK_SID") or "s%3AIFNNLHqlzGtWpYD67bmj4EEayOdfrlyl.z5Hd4Cd5%2BjxoTzsx%2FEbQfqWT6TXUTD8AuBc43Yx0VDI"
 SEND_EMAIL = os.getenv("SUBSTACK_SEND_EMAIL", "false").lower() in ("true", "1", "yes")
 
 BANNED_AI_WORDS = [
