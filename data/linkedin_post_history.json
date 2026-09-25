@@ -26,5 +26,19 @@
     "share_id": "urn:li:share:7509122014268416000",
     "link": "https://www.linkedin.com/feed/update/urn:li:share:7509122014268416000",
     "error": null
+  },
+  {
+    "date_ist": "2026-09-25",
+    "timestamp_ist": "2026-09-25 14:14:21 IST",
+    "slot_num": 3,
+    "scheduled_time_ist": "14:00",
+    "target": "The Macro Ledger (Substack)",
+    "category": "factor_alpha",
+    "word_count": 166,
+    "text": "Momentum is among the most pervasive anomalies in financial literature.\nYet when market regimes pivot, momentum crashes with greater velocity than almost any other systematic factor.\n\nMomentum crashes are not random black swans; they are structural liquidity unwinds. During prolonged trends, long momentum portfolios become congested in high-beta names while short baskets concentrate heavily in distressed value equities. When an unexpected macroeconomic catalyst hits, beaten-down value names ignite violent short-covering rallies while crowded winners undergo forced liquidation.\n\nSystematic momentum strategies that fail to orthogonalize momentum against market beta and residual volatility suffer extreme left-tail drawdown events. By dynamically weighting momentum exposures by inverse trailing volatility and hedging factor crowding risk, systematic managers can eliminate up to 42% of factor drawdowns during sharp regime transitions.\n\nSimply ranking stocks by 12-month return is amateur quantitative modeling. True factor durability requires continuous risk decomposition and factor hygiene.\n\nRead our complete mathematical analysis of momentum factor construction and risk mitigation on The Macro Ledger: https://sabhay1.substack.com\n\n#FactorInvesting #QuantitativeTrading #MomentumStrategy #RiskManagement #TheMacroLedger",
+    "success": true,
+    "share_id": "urn:li:share:7509170925003743232",
+    "link": "https://www.linkedin.com/feed/update/urn:li:share:7509170925003743232",
+    "error": null
   }
 ]
