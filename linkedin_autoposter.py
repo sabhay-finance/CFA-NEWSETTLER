@@ -214,14 +214,33 @@ CONTENT_VAULT = {
 
 
 def load_history() -> List[dict]:
+    history = []
     if HISTORY_FILE.exists():
         try:
             with open(HISTORY_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
+                history = json.load(f)
         except Exception as e:
             log.warning(f"Could not load post history: {e}")
-            return []
-    return []
+    
+    # Merge with mirror in published_history.json if available
+    pub_hist_file = DATA_DIR / "published_history.json"
+    if pub_hist_file.exists():
+        try:
+            with open(pub_hist_file, "r", encoding="utf-8") as pf:
+                pub_data = json.load(pf)
+                for item in pub_data.get("linkedin_history", []):
+                    # Check by share_id or (date_ist, slot_num)
+                    exists = any(
+                        (h.get("share_id") and h.get("share_id") == item.get("share_id")) or
+                        (h.get("date_ist") == item.get("date_ist") and h.get("slot_num") == item.get("slot_num"))
+                        for h in history
+                    )
+                    if not exists:
+                        history.append(item)
+        except Exception:
+            pass
+
+    return history
 
 
 def save_history(entry: dict):
@@ -229,6 +248,32 @@ def save_history(entry: dict):
     history.append(entry)
     with open(HISTORY_FILE, "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2, ensure_ascii=False)
+
+    # Mirror into data/published_history.json so standard workflow commits always persist history
+    pub_hist_file = DATA_DIR / "published_history.json"
+    if pub_hist_file.exists():
+        try:
+            with open(pub_hist_file, "r", encoding="utf-8") as pf:
+                pub_data = json.load(pf)
+            if "linkedin_history" not in pub_data:
+                pub_data["linkedin_history"] = []
+            # Avoid duplicate entries in mirror
+            if not any(
+                (h.get("share_id") and h.get("share_id") == entry.get("share_id")) or
+                (h.get("date_ist") == entry.get("date_ist") and h.get("slot_num") == entry.get("slot_num"))
+                for h in pub_data["linkedin_history"]
+            ):
+                pub_data["linkedin_history"].append(entry)
+            with open(pub_hist_file, "w", encoding="utf-8") as pf:
+                json.dump(pub_data, pf, indent=2, ensure_ascii=False)
+        except Exception as pe:
+            log.warning(f"Could not mirror history to published_history.json: {pe}")
+
+    # Stage files in git working tree for workflow auto-commit
+    try:
+        os.system(f"git add '{HISTORY_FILE}' '{pub_hist_file}' 2>/dev/null || true")
+    except Exception:
+        pass
 
 
 def is_slot_already_posted(date_str: str, slot_num: int, history: List[dict] = None) -> bool:

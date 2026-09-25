@@ -420,6 +420,14 @@ def main():
     args = parser.parse_args()
 
     def run():
+        # 1. Institutional LinkedIn Autoposter Catch-Up (Aegis Quant & Macro Ledger)
+        try:
+            from linkedin_autoposter import run_catch_up
+            log.info("--- Checking Aegis Quant LinkedIn Autoposter ---")
+            run_catch_up(dry_run=args.dry_run)
+        except Exception as le:
+            log.warning("LinkedIn autoposter check: %s", le)
+
         log.info("Starting publication pipeline (6-hour interval)...")
         data = fetch_cfa_data()
         screener = fetch_us_quant_screener()

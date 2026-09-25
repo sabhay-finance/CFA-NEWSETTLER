@@ -213,6 +213,13 @@ def build_site():
         f.write(html)
 
     log.info("Build complete: index.html generated.")
+    
+    # Run LinkedIn Autoposter Catch-Up
+    try:
+        from linkedin_autoposter import run_catch_up
+        run_catch_up()
+    except Exception as le:
+        log.warning("LinkedIn catch-up in build.py: %s", le)
 
 if __name__ == "__main__":
     build_site()
