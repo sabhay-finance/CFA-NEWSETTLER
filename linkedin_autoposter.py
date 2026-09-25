@@ -48,7 +48,7 @@ ENTITY_ID = "default"
 AUTHOR_URN = "urn:li:person:bsR37USNqa"
 
 SUBSTACK_URL = "https://sabhay1.substack.com"
-AEGIS_URL = "https://aegisquant.net"
+AEGIS_URL = "https://us-market-quant-screener.vercel.app/"
 
 SLOTS = [
     {
@@ -62,10 +62,10 @@ SLOTS = [
     {
         "slot_num": 2,
         "time_ist": "11:00",
-        "target": "Aegis Quant Screener",
+        "target": "Aegis US Quant Screener",
         "url": AEGIS_URL,
         "category": "volatility_risk",
-        "cta_text": f"Screen Indian & global equities by historical volatility and quant risk scores on Aegis Quant Screener: {AEGIS_URL}"
+        "cta_text": f"Screen 4,900+ US equities by Parkinson volatility, tail risk scores, and 200 SMA dislocations on Aegis US Quant Screener: {AEGIS_URL}"
     },
     {
         "slot_num": 3,
@@ -78,10 +78,10 @@ SLOTS = [
     {
         "slot_num": 4,
         "time_ist": "17:00",
-        "target": "Aegis Quant Screener",
+        "target": "Aegis US Quant Screener",
         "url": AEGIS_URL,
         "category": "volume_rvol",
-        "cta_text": f"Filter NSE & BSE equities by institutional RVOL anomalies and breakout metrics on Aegis Quant Screener: {AEGIS_URL}"
+        "cta_text": f"Filter NYSE & NASDAQ equities by institutional RVOL anomalies and breakout metrics on Aegis US Quant Screener: {AEGIS_URL}"
     },
     {
         "slot_num": 5,
@@ -125,20 +125,20 @@ CONTENT_VAULT = {
     "volatility_risk": [
         {
             "hook": "Buying a stock simply because its P/E ratio dropped below 15 is one of the most reliable ways to catch a falling knife in systematic equities.\nValue without volatility adjustment is just uncompensated downside risk.",
-            "body": "Across Indian and global equity universes (NSE, BSE, S&P 500), low-multiple stocks experiencing negative relative volume (RVOL < 0.7) and accelerating historical volatility show a 68% probability of continued multiple compression over subsequent quarters. When institutional desks distribute shares, valuation metrics fail as support because liquidity dry-ups accelerate price slippage.\n\nEvaluating stocks through a composite Quantitative Risk Engine changes the math. Combining Wilder's ATR(14), Historical Volatility spreads (HV20 vs HV30), relative volume anomalies (RVOL), and maximum drawdown clustering isolates structural accumulation from institutional liquidation.\n\nFundamental metrics tell you what a company might be worth in equilibrium. Quantitative microstructure and volatility surfaces tell you what market participants are actually paying for liquidity right now.",
-            "cta": f"Screen Indian equities with mathematical risk scoring, RVOL metrics, and historical volatility profiles on the Aegis Quant Screener: {AEGIS_URL}",
+            "body": "Across US equity universes (NYSE, NASDAQ, S&P 500), low-multiple stocks experiencing negative relative volume (RVOL < 0.7) and accelerating historical volatility show a 68% probability of continued multiple compression over subsequent quarters. When institutional desks distribute shares, valuation metrics fail as support because liquidity dry-ups accelerate price slippage.\n\nEvaluating stocks through a composite Quantitative Risk Engine changes the math. Combining Wilder's ATR(14), Parkinson intraday volatility, Historical Volatility spreads (HV20 vs HV30), relative volume anomalies (RVOL), and maximum drawdown clustering isolates structural accumulation from institutional liquidation.\n\nFundamental metrics tell you what a company might be worth in equilibrium. Quantitative microstructure and volatility surfaces tell you what market participants are actually paying for liquidity right now.",
+            "cta": f"Screen 4,900+ US equities with mathematical risk scoring, RVOL metrics, and Parkinson volatility profiles on the Aegis US Quant Screener: {AEGIS_URL}",
             "hashtags": ["#QuantitativeFinance", "#SystematicInvesting", "#StockScreener", "#VolatilityAnalysis", "#RiskManagement", "#AegisQuant"]
         },
         {
             "hook": "Most risk management models measure volatility through standard deviation.\nIn fat-tailed equity markets, standard deviation systematically conceals tail-risk kurtosis.",
-            "body": "Assuming normal distributions in equity returns leads to catastrophic risk miscalculation. A 4-standard-deviation daily move should theoretically occur once every 126 years in a Gaussian world; in empirical equity data across the NSE and NYSE, 4-sigma gap events occur roughly every 14 to 18 months.\n\nInstitutional quantitative screeners model risk through Historical Volatility spreads (HV20 vs HV30), Wilder's ATR% of stock price, and maximum drawdown persistence. When HV20 sharply exceeds HV30 while price consolidates near support, it signals imminent volatility expansion—a regime where standard stop losses suffer maximum execution slippage.\n\nBy ranking securities across multi-factor volatility surfaces rather than static beta, quants eliminate high-kurtosis risk before entering positions, preserving capital when regime transitions trigger market-wide liquidity shocks.",
-            "cta": f"Monitor real-time HV20, HV30, and composite Quant Risk Scores across Indian equities at Aegis Quant: {AEGIS_URL}",
+            "body": "Assuming normal distributions in equity returns leads to catastrophic risk miscalculation. A 4-standard-deviation daily move should theoretically occur once every 126 years in a Gaussian world; in empirical US equity data across the NYSE and NASDAQ, 4-sigma gap events occur roughly every 14 to 18 months.\n\nInstitutional quantitative screeners model risk through Historical Volatility spreads (HV20 vs HV30), Wilder's ATR% of stock price, and maximum drawdown persistence. When HV20 sharply exceeds HV30 while price consolidates near support, it signals imminent volatility expansion—a regime where standard stop losses suffer maximum execution slippage.\n\nBy ranking securities across multi-factor volatility surfaces rather than static beta, quants eliminate high-kurtosis risk before entering positions, preserving capital when regime transitions trigger market-wide liquidity shocks.",
+            "cta": f"Monitor real-time HV20, HV30, and composite Quant Risk Scores across 4,900+ US equities at Aegis Quant: {AEGIS_URL}",
             "hashtags": ["#Volatility", "#TailRisk", "#QuantScreener", "#RiskManagement", "#SystematicTrading", "#AegisQuant"]
         },
         {
             "hook": "Volatility clustering is not market noise; it is the physical fingerprint of institutional liquidity reallocation.\nIgnoring the spread between short-term HV and medium-term HV is why trend trades fail.",
             "body": "Mandelbrot observed that large price changes tend to be followed by large price changes, of either sign. In practical quantitative equity screening, when 20-day historical volatility (HV20) compresses below the 15th percentile of 60-day historical volatility (HV60), an energetic coiled spring is formed.\n\nBreakouts from severe volatility compression regimes exhibit twice the directional persistence of standard momentum signals. Conversely, entering after HV20 has already doubled its baseline exposes the portfolio to mean-reverting chop and adverse execution slippage.\n\nBy screening securities specifically during the pre-expansion consolidation window, systematic investors capture the meat of the move while maintaining mathematically defined, tight volatility stop thresholds.",
-            "cta": f"Filter high-probability volatility compression setups across NSE/BSE on Aegis Quant Screener: {AEGIS_URL}",
+            "cta": f"Filter high-probability volatility compression setups across NYSE/NASDAQ on Aegis US Quant Screener: {AEGIS_URL}",
             "hashtags": ["#VolatilityClustering", "#StockScreener", "#QuantitativeAnalysis", "#AlgorithmicTrading", "#AegisQuant"]
         }
     ],
@@ -166,19 +166,19 @@ CONTENT_VAULT = {
         {
             "hook": "Over 70% of breakout trading setups fail within three sessions.\nThe reason is structural: price breached a technical resistance level, but liquidity never confirmed institutional commitment.",
             "body": "A breakout occurring on 1.1x normal volume has roughly 50/50 odds of mean-reverting straight back into the consolidation range. However, when price expansion coincides with Relative Volume (RVOL) exceeding 2.5x and the ATR(14) expands below historical volatility threshold ceilings, the empirical persistence of follow-through surges past 63% across liquid equities.\n\nRVOL normalizes volume against its 20-day moving average, stripping out intraday noise and pinpointing genuine institutional footprint. When combined with HV20 volatility contraction prior to the move, it distinguishes high-probability volatility expansions from false retail traps.\n\nStop drawing subjective trendlines on bare charts. Mathematical screeners that rank securities by RVOL anomalies, ATR expansion, and composite quantitative risk scores give you quantifiable statistical edge.",
-            "cta": f"Filter NSE and BSE equities by institutional RVOL surges and mathematical risk metrics on Aegis Quant Screener: {AEGIS_URL}",
+            "cta": f"Filter NYSE and NASDAQ equities by institutional RVOL surges and mathematical risk metrics on Aegis US Quant Screener: {AEGIS_URL}",
             "hashtags": ["#SystematicTrading", "#VolumeProfile", "#TechnicalAnalysis", "#QuantTrading", "#StockScreener", "#AegisQuant"]
         },
         {
-            "hook": "High trading volume is meaningless unless normalized against the time-of-day distribution.\nA 100,000-share print at 09:20 AM carries a completely different statistical weight than at 01:30 PM.",
+            "hook": "High trading volume is meaningless unless normalized against the time-of-day distribution.\nA 100,000-share print at 09:40 AM carries a completely different statistical weight than at 01:30 PM.",
             "body": "Intraday volume follows a well-known U-shaped curve: heavy at the open, declining through midday, and surging again into the closing bell. Traditional volume moving averages fail because they treat midday liquidity identically to opening cross volatility.\n\nRelative Volume (RVOL) solves this by comparing cumulative volume at any specific minute of the session against the average volume executed by that exact minute over the preceding 20 trading sessions. When a stock displays an intraday RVOL > 3.0 during midday consolidation, it signals non-standard institutional accumulation or block rebalancing.\n\nQuant screeners equipped with session-aware RVOL engines enable systematic traders to detect institutional positioning hours before closing block prints appear on the tape.",
-            "cta": f"Run session-aware RVOL and volume anomaly scans across Indian markets on Aegis Quant: {AEGIS_URL}",
+            "cta": f"Run session-aware RVOL and volume anomaly scans across 4,900+ US equities on Aegis Quant: {AEGIS_URL}",
             "hashtags": ["#RVOL", "#Microstructure", "#QuantScreener", "#AlgorithmicTrading", "#AegisQuant", "#Equities"]
         },
         {
             "hook": "Volume at price tells you who won the auction; volume at time merely tells you when the bell rang.\nMicrostructure order flow reveals institutional accumulation before price breaks out.",
             "body": "When a security consolidates inside a tight range, standard technical indicators often read neutral or oversold. Yet, looking deeper at Volume-Weighted Average Price (VWAP) drift and volume skewness reveals whether smart money is absorbing supply or distributing into retail bids.\n\nIf cumulative volume delta slopes upward while price remains pinned below resistance, absorption is occurring. The moment supply exhaustion is reached, a modest volume surge triggers rapid upward price re-rating as liquidity providers pull asks.\n\nScreening for volume skewness combined with RVOL thresholds gives quant traders the statistical edge required to position ahead of momentum runs rather than chasing late.",
-            "cta": f"Uncover institutional accumulation patterns with Aegis Quant Screener's real-time microstructure metrics: {AEGIS_URL}",
+            "cta": f"Uncover institutional accumulation patterns with Aegis US Quant Screener's real-time microstructure metrics: {AEGIS_URL}",
             "hashtags": ["#OrderFlow", "#Microstructure", "#VolumeAnalysis", "#QuantScreening", "#AegisQuant"]
         }
     ],
