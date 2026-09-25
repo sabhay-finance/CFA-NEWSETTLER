@@ -434,6 +434,63 @@ def publish_to_substack(post, dry_run=False):
             except Exception as e:
                 log.warning("[%s] Engine failed with exception: %s", engine_name, e)
 
+    # Cloudflare Challenge Fallback: Real headless browser with UC Mode & Xvfb
+    if not published:
+        log.info("HTTP engines encountered Cloudflare challenge. Engaging headless browser engine (UC mode)...")
+        for sid in sids_to_try:
+            if published:
+                break
+            try:
+                from seleniumbase import SB
+                log.info("Launching SeleniumBase UC session to solve Cloudflare challenge...")
+                with SB(uc=True, xvfb=True) as sb:
+                    sb.driver.uc_open_with_reconnect(f"{SUBSTACK_BASE_URL}/publish", 5)
+                    sb.driver.add_cookie({"name": "substack.sid", "value": sid, "domain": ".substack.com", "path": "/"})
+                    sb.driver.add_cookie({"name": "connect.sid", "value": sid, "domain": ".substack.com", "path": "/"})
+                    sb.driver.uc_open_with_reconnect(f"{SUBSTACK_BASE_URL}/publish", 4)
+
+                    payload_json = json.dumps(draft_payload)
+                    create_script = f"""
+                    const done = arguments[arguments.length - 1];
+                    fetch('{SUBSTACK_BASE_URL}/api/v1/drafts', {{
+                        method: 'POST',
+                        headers: {{'Content-Type': 'application/json', 'Accept': 'application/json'}},
+                        body: {payload_json}
+                    }})
+                    .then(r => r.json().then(data => done({{status: r.status, data: data}})))
+                    .catch(err => done({{status: 500, error: err.toString()}}));
+                    """
+                    draft_res = sb.driver.execute_async_script(create_script)
+                    log.info("[browser_engine] Draft result: %s", draft_res.get("status") if draft_res else None)
+
+                    if draft_res and draft_res.get("status") in (200, 201):
+                        draft_id = draft_res["data"]["id"]
+                        send_bool_str = "true" if SEND_EMAIL else "false"
+                        pub_script = f"""
+                        const done = arguments[arguments.length - 1];
+                        fetch('{SUBSTACK_BASE_URL}/api/v1/drafts/{draft_id}/publish', {{
+                            method: 'POST',
+                            headers: {{'Content-Type': 'application/json', 'Accept': 'application/json'}},
+                            body: JSON.stringify({{send: {send_bool_str}}})
+                        }})
+                        .then(r => r.json().then(data => done({{status: r.status, data: data}})))
+                        .catch(err => done({{status: 500, error: err.toString()}}));
+                        """
+                        pub_res = sb.driver.execute_async_script(pub_script)
+                        log.info("[browser_engine] Publish result: %s", pub_res.get("status") if pub_res else None)
+                        if pub_res and pub_res.get("status") in (200, 201):
+                            slug = pub_res["data"].get("slug") or str(draft_id)
+                            post_url = f"{SUBSTACK_BASE_URL}/p/{slug}"
+                            log.info("🎉 SUCCESS: Published live via browser engine at %s", post_url)
+                            published = True
+                            break
+                        else:
+                            log.error("Browser publish failed: %s", pub_res)
+                    else:
+                        log.warning("Browser draft creation failed: %s", draft_res)
+            except Exception as be:
+                log.warning("Browser engine failed with exception: %s", be)
+
     if published:
         # Multi-channel syndication (X & Reddit)
         try:
