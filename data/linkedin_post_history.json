@@ -40,5 +40,47 @@
     "share_id": "urn:li:share:7509170925003743232",
     "link": "https://www.linkedin.com/feed/update/urn:li:share:7509170925003743232",
     "error": null
+  },
+  {
+    "date_ist": "2026-09-25",
+    "timestamp_ist": "2026-09-25 15:16:53 IST",
+    "slot_num": 4,
+    "scheduled_time_ist": "17:00",
+    "target": "Aegis US Quant Screener",
+    "category": "volume_rvol",
+    "word_count": 147,
+    "text": "Volume at price tells you who won the auction; volume at time merely tells you when the bell rang.\nMicrostructure order flow reveals institutional accumulation before price breaks out.\n\nWhen a security consolidates inside a tight range, standard technical indicators often read neutral or oversold. Yet, looking deeper at Volume-Weighted Average Price (VWAP) drift and volume skewness reveals whether smart money is absorbing supply or distributing into retail bids.\n\nIf cumulative volume delta slopes upward while price remains pinned below resistance, absorption is occurring. The moment supply exhaustion is reached, a modest volume surge triggers rapid upward price re-rating as liquidity providers pull asks.\n\nScreening for volume skewness combined with RVOL thresholds gives quant traders the statistical edge required to position ahead of momentum runs rather than chasing late.\n\nUncover institutional accumulation patterns with Aegis US Quant Screener's real-time microstructure metrics: https://us-market-quant-screener.vercel.app/\n\n#OrderFlow #Microstructure #VolumeAnalysis #QuantScreening #AegisQuant",
+    "success": true,
+    "share_id": "urn:li:share:7509186660543188992",
+    "link": "https://www.linkedin.com/feed/update/urn:li:share:7509186660543188992",
+    "error": null
+  },
+  {
+    "date_ist": "2026-09-25",
+    "timestamp_ist": "2026-09-25 15:17:25 IST",
+    "slot_num": 5,
+    "scheduled_time_ist": "19:30",
+    "target": "The Macro Ledger (Substack)",
+    "category": "backtest_execution",
+    "word_count": 157,
+    "text": "Overfitting in quantitative trading is like memorizing the answers to last year's exam.\nYou get a perfect score on the practice test, but fail the live paper every single time.\n\nWhen an analyst tests 200 combinations of moving averages and RSI thresholds to find the single curve that maximized returns over the past 5 years, they haven't discovered an economic principle. They have merely fit parameters to historical noise.\n\nTo combat parameter overfitting, institutional quant teams utilize Combinatorial Purged Cross-Validation (CPCV) and Deflated Sharpe Ratios (DSR). By penalizing performance based on the total number of historical hypotheses tested, DSR computes the true statistical probability that a strategy's observed Sharpe is genuine skill rather than lucky variance.\n\nIf a quantitative model lacks economic intuition and fails under out-of-sample perturbations, it should never be allocated live trading capital.\n\nRead our deep dive on statistical deflated Sharpe ratios and cross-validation on The Macro Ledger: https://sabhay1.substack.com\n\n#MachineLearningInFinance #Backtesting #Overfitting #QuantResearch #TheMacroLedger",
+    "success": true,
+    "share_id": "urn:li:share:7509186797764259840",
+    "link": "https://www.linkedin.com/feed/update/urn:li:share:7509186797764259840",
+    "error": null
+  },
+  {
+    "date_ist": "2026-09-25",
+    "timestamp_ist": "2026-09-25 15:17:42 IST",
+    "slot_num": 6,
+    "scheduled_time_ist": "21:30",
+    "target": "The Macro Ledger (Substack)",
+    "category": "cross_asset_momentum",
+    "word_count": 159,
+    "text": "Most backtests fail not because the alpha died, but because retail backtesting treats market volatility as a stationary Gaussian distribution.\nMandelbrot proved in 1963 that volatility clusters—yet 90% of algorithmic trading systems still assume independent, identically distributed returns.\n\nWhen 20-day Historical Volatility (HV20) surges past the 80th percentile relative to HV60, standard stop-losses trigger execution slippage that compounds drawdowns. Volatility-scaled position sizing (e.g. fixed volatility targeting at 12% annualized) dramatically compresses maximum drawdown from -34% to -14.2% across a 15-year equity curve, without reducing terminal Sharpe ratio.\n\nQuants obsessed with optimizing entry indicators (RSI, MACD, Moving Average crossovers) are solving the wrong problem. Your edge is not where you enter; your edge is dynamic volatility-adjusted exposure.\n\nBy systematically cutting gross exposure when volatility regimes spike and increasing leverage during low-volatility drift, systematic models smooth returns and avoid catastrophic left-tail liquidation cascades.\n\nRead the complete quantitative research and Tape Notes on The Macro Ledger: https://sabhay1.substack.com\n\n#QuantitativeFinance #SystematicTrading #AlgorithmicTrading #Volatility #TheMacroLedger",
+    "success": true,
+    "share_id": "urn:li:share:7509186867087724544",
+    "link": "https://www.linkedin.com/feed/update/urn:li:share:7509186867087724544",
+    "error": null
   }
 ]
