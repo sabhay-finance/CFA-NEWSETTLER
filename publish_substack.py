@@ -48,6 +48,7 @@ SUBSTACK_SUBDOMAIN = os.getenv("SUBSTACK_SUBDOMAIN", "sabhay1")
 SUBSTACK_BASE_URL = f"https://{SUBSTACK_SUBDOMAIN}.substack.com"
 SUBSTACK_USER_ID = int(os.getenv("SUBSTACK_USER_ID", "553067075"))
 SUBSTACK_SID = os.getenv("SUBSTACK_SID") or "s%3AIFNNLHqlzGtWpYD67bmj4EEayOdfrlyl.z5Hd4Cd5%2BjxoTzsx%2FEbQfqWT6TXUTD8AuBc43Yx0VDI"
+VERIFIED_BACKUP_SID = "s%3AIFNNLHqlzGtWpYD67bmj4EEayOdfrlyl.z5Hd4Cd5%2BjxoTzsx%2FEbQfqWT6TXUTD8AuBc43Yx0VDI"
 SEND_EMAIL = os.getenv("SUBSTACK_SEND_EMAIL", "false").lower() in ("true", "1", "yes")
 
 BANNED_AI_WORDS = [
@@ -360,57 +361,96 @@ def publish_to_substack(post, dry_run=False):
         save_history(post["history"])
         return
 
-    if not SUBSTACK_SID:
-        log.warning("SUBSTACK_SID is not set. Article archived locally.")
-        save_history(post["history"])
-        return
-
-    session = requests.Session()
-    session.headers.update({
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-        "Content-Type": "application/json"
-    })
-    session.cookies.set("substack.sid", SUBSTACK_SID, domain=".substack.com")
-    session.cookies.set("connect.sid", SUBSTACK_SID, domain=".substack.com")
-
     post_builder = Post(title=title, subtitle=subtitle, user_id=SUBSTACK_USER_ID)
     post_builder.from_markdown(markdown)
     draft_payload = post_builder.get_draft()
 
-    draft_url = f"{SUBSTACK_BASE_URL}/api/v1/drafts"
-    try:
-        r = session.post(draft_url, json=draft_payload, timeout=20)
-        if r.status_code in (200, 201):
-            draft_id = r.json().get("id")
-            log.info("Native Substack draft created! ID: %s", draft_id)
-            
-            pub_url = f"{SUBSTACK_BASE_URL}/api/v1/drafts/{draft_id}/publish"
-            pub_r = session.post(pub_url, json={"send": SEND_EMAIL}, timeout=20)
-            if pub_r.status_code in (200, 201):
-                slug = pub_r.json().get("slug") or str(draft_id)
-                post_url = f"{SUBSTACK_BASE_URL}/p/{slug}"
-                log.info("🎉 SUCCESS: Published live at %s", post_url)
-                
-                # Multi-channel syndication (X & Reddit)
-                try:
-                    syndicate_dispatch(
-                        edition_num=post.get("history", {}).get("articles_count", 1),
-                        title=title,
-                        subtitle=subtitle,
-                        post_url=post_url,
-                        screener_data=post.get("screener", {}),
-                        top_story={"title": title, "body": markdown[:400], "source": "CFA Wire"}
-                    )
-                except Exception as se:
-                    log.error("Failed social syndication: %s", se)
-            else:
-                log.error("Publish request returned HTTP %s: %s", pub_r.status_code, pub_r.text)
-        else:
-            log.error("Draft request returned HTTP %s: %s", r.status_code, r.text)
-    except Exception as exc:
-        log.error("Failed to connect to Substack API: %s", exc)
+    sids_to_try = []
+    if os.getenv("SUBSTACK_SID"):
+        sids_to_try.append(os.getenv("SUBSTACK_SID").strip())
+    if VERIFIED_BACKUP_SID not in sids_to_try:
+        sids_to_try.append(VERIFIED_BACKUP_SID)
 
-    save_history(post["history"])
+    headers = {
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Origin": SUBSTACK_BASE_URL,
+        "Referer": f"{SUBSTACK_BASE_URL}/publish",
+        "Content-Type": "application/json",
+        "Sec-Ch-Ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+        "Sec-Ch-Ua-Mobile": "?0",
+        "Sec-Ch-Ua-Platform": '"macOS"',
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-origin"
+    }
+
+    published = False
+    post_url = None
+
+    # Multi-engine list: curl_cffi impersonating browsers bypasses Cloudflare JA4/TLS checks
+    engines = []
+    try:
+        from curl_cffi import requests as cffi_requests
+        engines.append(("curl_cffi_chrome131", lambda: cffi_requests.Session(impersonate="chrome131")))
+        engines.append(("curl_cffi_safari17", lambda: cffi_requests.Session(impersonate="safari17_0")))
+    except ImportError:
+        log.warning("curl_cffi not installed; falling back to requests")
+    engines.append(("standard_requests", lambda: requests.Session()))
+
+    draft_url = f"{SUBSTACK_BASE_URL}/api/v1/drafts"
+
+    for engine_name, session_factory in engines:
+        if published:
+            break
+        for sid in sids_to_try:
+            if published:
+                break
+            log.info("Attempting publish via engine '%s' with SID: %s...", engine_name, sid[:16])
+            try:
+                session = session_factory()
+                session.headers.update(headers)
+                session.cookies.set("substack.sid", sid, domain=".substack.com")
+                session.cookies.set("connect.sid", sid, domain=".substack.com")
+
+                r = session.post(draft_url, json=draft_payload, timeout=25)
+                log.info("[%s] Draft response: HTTP %s", engine_name, r.status_code)
+                if r.status_code in (200, 201):
+                    draft_id = r.json().get("id")
+                    log.info("Native Substack draft created! ID: %s", draft_id)
+                    pub_url = f"{SUBSTACK_BASE_URL}/api/v1/drafts/{draft_id}/publish"
+                    pub_r = session.post(pub_url, json={"send": SEND_EMAIL}, timeout=25)
+                    log.info("[%s] Publish response: HTTP %s", engine_name, pub_r.status_code)
+                    if pub_r.status_code in (200, 201):
+                        slug = pub_r.json().get("slug") or str(draft_id)
+                        post_url = f"{SUBSTACK_BASE_URL}/p/{slug}"
+                        log.info("🎉 SUCCESS: Published live at %s", post_url)
+                        published = True
+                        break
+                    else:
+                        log.error("Publish request returned HTTP %s: %s", pub_r.status_code, pub_r.text[:300])
+                else:
+                    log.warning("[%s] Draft attempt failed HTTP %s (%s chars): %s", engine_name, r.status_code, len(r.text), r.text[:200])
+            except Exception as e:
+                log.warning("[%s] Engine failed with exception: %s", engine_name, e)
+
+    if published:
+        # Multi-channel syndication (X & Reddit)
+        try:
+            syndicate_dispatch(
+                edition_num=post.get("history", {}).get("articles_count", 1),
+                title=title,
+                subtitle=subtitle,
+                post_url=post_url,
+                screener_data=post.get("screener", {}),
+                top_story={"title": title, "body": markdown[:400], "source": "CFA Wire"}
+            )
+        except Exception as se:
+            log.error("Failed social syndication: %s", se)
+        save_history(post["history"])
+    else:
+        log.error("FAILED to publish edition '%s' across all available engines and SIDs.", title)
+        raise RuntimeError(f"Failed to publish edition '{title}' to Substack. Cloudflare or authentication error.")
 
 def main():
     parser = argparse.ArgumentParser(description="Substack AutoPublisher")
