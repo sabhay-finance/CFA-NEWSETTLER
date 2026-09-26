@@ -1,0 +1,18 @@
+
+=================================================================
+SLOT #2 | TARGET: Aegis US Quant Screener | WORDS: 160
+=================================================================
+Most risk management models measure volatility through standard deviation.
+In fat-tailed equity markets, standard deviation systematically conceals tail-risk kurtosis.
+
+Assuming normal distributions in equity returns leads to catastrophic risk miscalculation. A 4-standard-deviation daily move should theoretically occur once every 126 years in a Gaussian world; in empirical US equity data across the NYSE and NASDAQ, 4-sigma gap events occur roughly every 14 to 18 months.
+
+Institutional quantitative screeners model risk through Historical Volatility spreads (HV20 vs HV30), Wilder's ATR% of stock price, and maximum drawdown persistence. When HV20 sharply exceeds HV30 while price consolidates near support, it signals imminent volatility expansion—a regime where standard stop losses suffer maximum execution slippage.
+
+By ranking securities across multi-factor volatility surfaces rather than static beta, quants eliminate high-kurtosis risk before entering positions, preserving capital when regime transitions trigger market-wide liquidity shocks.
+
+Monitor real-time HV20, HV30, and composite Quant Risk Scores across 4,900+ US equities at Aegis Quant: https://us-market-quant-screener.vercel.app/
+
+#Volatility #TailRisk #QuantScreener #RiskManagement #SystematicTrading #AegisQuant
+=================================================================
+
