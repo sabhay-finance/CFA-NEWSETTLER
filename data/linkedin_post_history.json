@@ -194,5 +194,33 @@
     "share_id": "urn:li:share:7509879108252745728",
     "link": "https://www.linkedin.com/feed/update/urn:li:share:7509879108252745728",
     "error": null
+  },
+  {
+    "date_ist": "2026-09-27",
+    "timestamp_ist": "2026-09-27 19:04:35 IST",
+    "slot_num": 3,
+    "scheduled_time_ist": "14:00",
+    "target": "The Macro Ledger (Substack)",
+    "category": "factor_alpha",
+    "word_count": 162,
+    "text": "Discounted cash flow models fail in changing macro regimes not because the mathematics are flawed, but because cost-of-capital assumptions remain static.\nValuation mechanics must adapt dynamically to term structure shifts.\n\nWhen the weighted average cost of capital (WACC) shifts by 150 basis points due to sovereign bond yield repricing, terminal value calculations for growth equities can contract by upwards of 35%. Yet traditional equity research analysts often leave discount rates unchanged for quarters.\n\nSystematic valuation frameworks link discount rates directly to real-time credit default spreads, sovereign curves, and market-implied equity risk premia. Point-in-time valuation surfaces reveal which market sectors are overpaying for duration and which offer genuine margin of safety under stressed liquidity regimes.\n\nIn our quantitative models, linking cash-flow duration to sovereign hurdle rates separates genuine compounders from capital-destroying balance sheets. Rigorous quantitative valuation is an active state-dependent exercise, not an annual spreadsheet update.\n\nExplore our valuation mechanics and cross-asset research on The Macro Ledger: https://sabhay1.substack.com\n\n#ValuationMechanics #WACC #DiscountRates #EquityResearch #TheMacroLedger",
+    "success": true,
+    "share_id": "urn:li:share:7509968739329536001",
+    "link": "https://www.linkedin.com/feed/update/urn:li:share:7509968739329536001",
+    "error": null
+  },
+  {
+    "date_ist": "2026-09-27",
+    "timestamp_ist": "2026-09-27 19:04:36 IST",
+    "slot_num": 4,
+    "scheduled_time_ist": "17:00",
+    "target": "Aegis US Quant Screener",
+    "category": "volume_rvol",
+    "word_count": 164,
+    "text": "Over 70% of breakout trading setups fail within three sessions.\nThe reason is structural: price breached a technical resistance level, but liquidity never confirmed institutional commitment.\n\nA breakout occurring on 1.1x normal volume has roughly 50/50 odds of mean-reverting straight back into the consolidation range. However, when price expansion coincides with Relative Volume (RVOL) exceeding 2.5x and the ATR(14) expands below historical volatility threshold ceilings, the empirical persistence of follow-through surges past 63% across liquid equities.\n\nRVOL normalizes volume against its 20-day moving average, stripping out intraday noise and pinpointing genuine institutional footprint. When combined with HV20 volatility contraction prior to the move, it distinguishes high-probability volatility expansions from false retail traps.\n\nStop drawing subjective trendlines on bare charts. Mathematical screeners that rank securities by RVOL anomalies, ATR expansion, and composite quantitative risk scores give you quantifiable statistical edge.\n\nFilter NYSE and NASDAQ equities by institutional RVOL surges and mathematical risk metrics on Aegis US Quant Screener: https://us-market-quant-screener.vercel.app/\n\n#SystematicTrading #VolumeProfile #TechnicalAnalysis #QuantTrading #StockScreener #AegisQuant",
+    "success": true,
+    "share_id": "urn:li:share:7509968744971091968",
+    "link": "https://www.linkedin.com/feed/update/urn:li:share:7509968744971091968",
+    "error": null
   }
 ]
