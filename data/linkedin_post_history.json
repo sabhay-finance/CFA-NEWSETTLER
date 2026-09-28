@@ -222,5 +222,33 @@
     "share_id": "urn:li:share:7509968744971091968",
     "link": "https://www.linkedin.com/feed/update/urn:li:share:7509968744971091968",
     "error": null
+  },
+  {
+    "date_ist": "2026-09-28",
+    "timestamp_ist": "2026-09-28 13:11:31 IST",
+    "slot_num": 1,
+    "scheduled_time_ist": "08:00",
+    "target": "The Macro Ledger (Substack)",
+    "category": "macro_rates",
+    "word_count": 150,
+    "text": "The term premium on long-dated sovereign debt is the single most underappreciated variable in modern macro allocation.\nWhen term premia reconstitute, multi-asset equity duration suffers severe multiple compression.\n\nFor over a decade of quantitative easing, sovereign term premia were suppressed into deep negative territory. Investors grew accustomed to discounting long-dated tech cash flows at unnaturally low terminal rates.\n\nToday, fiscal issuance deficits and quantitative tightening are forcing private balance sheets to absorb trillions in duration supply. As term premia push back into positive territory, the discount factor applied to distant earnings expands non-linearly.\n\nEquity portfolios holding high price-to-sales ratios without near-term free cash flow yield become highly convex to upward yield curve steepening. Tracking the slope of the 2s10s curve against cross-asset risk appetite provides an essential compass for tactical portfolio rebalancing.\n\nDeconstruct the yield curve mechanics and cross-asset impacts on The Macro Ledger: https://sabhay1.substack.com\n\n#YieldCurve #MacroEconomics #SovereignDebt #DurationRisk #TheMacroLedger",
+    "success": true,
+    "share_id": "urn:li:share:7510242275570978816",
+    "link": "https://www.linkedin.com/feed/update/urn:li:share:7510242275570978816",
+    "error": null
+  },
+  {
+    "date_ist": "2026-09-28",
+    "timestamp_ist": "2026-09-28 13:11:32 IST",
+    "slot_num": 2,
+    "scheduled_time_ist": "11:00",
+    "target": "Aegis US Quant Screener",
+    "category": "volatility_risk",
+    "word_count": 176,
+    "text": "Buying a stock simply because its P/E ratio dropped below 15 is one of the most reliable ways to catch a falling knife in systematic equities.\nValue without volatility adjustment is just uncompensated downside risk.\n\nAcross US equity universes (NYSE, NASDAQ, S&P 500), low-multiple stocks experiencing negative relative volume (RVOL < 0.7) and accelerating historical volatility show a 68% probability of continued multiple compression over subsequent quarters. When institutional desks distribute shares, valuation metrics fail as support because liquidity dry-ups accelerate price slippage.\n\nEvaluating stocks through a composite Quantitative Risk Engine changes the math. Combining Wilder's ATR(14), Parkinson intraday volatility, Historical Volatility spreads (HV20 vs HV30), relative volume anomalies (RVOL), and maximum drawdown clustering isolates structural accumulation from institutional liquidation.\n\nFundamental metrics tell you what a company might be worth in equilibrium. Quantitative microstructure and volatility surfaces tell you what market participants are actually paying for liquidity right now.\n\nScreen 4,900+ US equities with mathematical risk scoring, RVOL metrics, and Parkinson volatility profiles on the Aegis US Quant Screener: https://us-market-quant-screener.vercel.app/\n\n#QuantitativeFinance #SystematicInvesting #StockScreener #VolatilityAnalysis #RiskManagement #AegisQuant",
+    "success": true,
+    "share_id": "urn:li:share:7510242280155504641",
+    "link": "https://www.linkedin.com/feed/update/urn:li:share:7510242280155504641",
+    "error": null
   }
 ]
