@@ -168,6 +168,34 @@
       "share_id": "urn:li:share:7510242280155504641",
       "link": "https://www.linkedin.com/feed/update/urn:li:share:7510242280155504641",
       "error": null
+    },
+    {
+      "date_ist": "2026-09-28",
+      "timestamp_ist": "2026-09-28 19:08:45 IST",
+      "slot_num": 3,
+      "scheduled_time_ist": "14:00",
+      "target": "The Macro Ledger (Substack)",
+      "category": "factor_alpha",
+      "word_count": 162,
+      "text": "Discounted cash flow models fail in changing macro regimes not because the mathematics are flawed, but because cost-of-capital assumptions remain static.\nValuation mechanics must adapt dynamically to term structure shifts.\n\nWhen the weighted average cost of capital (WACC) shifts by 150 basis points due to sovereign bond yield repricing, terminal value calculations for growth equities can contract by upwards of 35%. Yet traditional equity research analysts often leave discount rates unchanged for quarters.\n\nSystematic valuation frameworks link discount rates directly to real-time credit default spreads, sovereign curves, and market-implied equity risk premia. Point-in-time valuation surfaces reveal which market sectors are overpaying for duration and which offer genuine margin of safety under stressed liquidity regimes.\n\nIn our quantitative models, linking cash-flow duration to sovereign hurdle rates separates genuine compounders from capital-destroying balance sheets. Rigorous quantitative valuation is an active state-dependent exercise, not an annual spreadsheet update.\n\nExplore our valuation mechanics and cross-asset research on The Macro Ledger: https://sabhay1.substack.com\n\n#ValuationMechanics #WACC #DiscountRates #EquityResearch #TheMacroLedger",
+      "success": true,
+      "share_id": "urn:li:share:7510332179848183808",
+      "link": "https://www.linkedin.com/feed/update/urn:li:share:7510332179848183808",
+      "error": null
+    },
+    {
+      "date_ist": "2026-09-28",
+      "timestamp_ist": "2026-09-28 19:08:47 IST",
+      "slot_num": 4,
+      "scheduled_time_ist": "17:00",
+      "target": "Aegis US Quant Screener",
+      "category": "volume_rvol",
+      "word_count": 147,
+      "text": "Volume at price tells you who won the auction; volume at time merely tells you when the bell rang.\nMicrostructure order flow reveals institutional accumulation before price breaks out.\n\nWhen a security consolidates inside a tight range, standard technical indicators often read neutral or oversold. Yet, looking deeper at Volume-Weighted Average Price (VWAP) drift and volume skewness reveals whether smart money is absorbing supply or distributing into retail bids.\n\nIf cumulative volume delta slopes upward while price remains pinned below resistance, absorption is occurring. The moment supply exhaustion is reached, a modest volume surge triggers rapid upward price re-rating as liquidity providers pull asks.\n\nScreening for volume skewness combined with RVOL thresholds gives quant traders the statistical edge required to position ahead of momentum runs rather than chasing late.\n\nUncover institutional accumulation patterns with Aegis US Quant Screener's real-time microstructure metrics: https://us-market-quant-screener.vercel.app/\n\n#OrderFlow #Microstructure #VolumeAnalysis #QuantScreening #AegisQuant",
+      "success": true,
+      "share_id": "urn:li:share:7510332185699241989",
+      "link": "https://www.linkedin.com/feed/update/urn:li:share:7510332185699241989",
+      "error": null
     }
   ]
 }
