@@ -15,6 +15,7 @@ import logging
 import argparse
 from pathlib import Path
 from datetime import datetime
+from difflib import SequenceMatcher
 from zoneinfo import ZoneInfo
 import requests
 from substack.post import Post
@@ -114,6 +115,23 @@ def save_history(history):
 
 def fetch_cfa_data():
     local_index = BASE_DIR / "index.html"
+    build_script = BASE_DIR / "build.py"
+    if build_script.exists():
+        need_build = False
+        if not local_index.exists():
+            need_build = True
+        else:
+            age_min = (time.time() - local_index.stat().st_mtime) / 60
+            if age_min >= 45:
+                need_build = True
+        if need_build:
+            try:
+                log.info("Rebuilding index.html via build.py for fresh stories...")
+                import subprocess
+                subprocess.run([sys.executable, str(build_script)], cwd=str(BASE_DIR), check=True, timeout=90)
+            except Exception as be:
+                log.warning("build.py execution failed: %s", be)
+
     html_content = ""
     if local_index.exists():
         with open(local_index, "r", encoding="utf-8") as f:
@@ -226,19 +244,87 @@ def build_quant_markdown(screener):
 * **CBOE Volatility (VIX):** {vix_p:.2f} ({vix_c:+.2f}%) — Volatility pricing active recalibration
 * **FX & Commodities:** DXY \\${dxy_p:.2f} ({dxy_c:+.2f}%) | WTI Crude \\${oil_p:.2f} ({oil_c:+.2f}%) | Gold Spot \\${gold_p:,.2f} ({gold_c:+.2f}%)"""
 
+def normalize_title(title: str) -> str:
+    if not title:
+        return ""
+    return re.sub(r"[^a-z0-9]", "", title.lower())
+
+def is_already_published(title: str, published_titles: list) -> bool:
+    if not title:
+        return True
+    norm = normalize_title(title)
+    if not norm:
+        return True
+    for pt in published_titles:
+        p_norm = normalize_title(pt)
+        if not p_norm:
+            continue
+        if norm == p_norm or (len(norm) > 20 and (norm in p_norm or p_norm in norm)):
+            return True
+        if SequenceMatcher(None, norm, p_norm).ratio() >= 0.75:
+            return True
+    return False
+
 def generate_post(data, screener):
     history = load_history()
-    used = set(history.get("published_titles", []))
+    published_titles = history.get("published_titles", [])
     
-    valid_general = [s for s in data.get("general", []) if s.get("title") and len(clean_story_body(s.get("full_content") or s.get("summary") or "")) >= 150]
-    valid_cfa = [s for s in data.get("cfa", []) if s.get("title") and len(clean_story_body(s.get("full_content") or s.get("summary") or "")) >= 150]
+    valid_general = [s for s in data.get("general", []) if s.get("title") and len(clean_story_body(s.get("full_content") or s.get("summary") or "")) >= 120]
+    valid_cfa = [s for s in data.get("cfa", []) if s.get("title") and len(clean_story_body(s.get("full_content") or s.get("summary") or "")) >= 120]
 
-    general = [s for s in valid_general if s["title"] not in used] or valid_general
-    cfa = [s for s in valid_cfa if s["title"] not in used] or valid_cfa
+    available_general = [s for s in valid_general if not is_already_published(s["title"], published_titles)]
+    available_cfa = [s for s in valid_cfa if not is_already_published(s["title"], published_titles)]
 
-    primary = general[0] if general else {}
-    secondary = general[1] if len(general) > 1 else (cfa[0] if cfa else {})
-    cfa_story = cfa[0] if cfa else {}
+    log.info("Unpublished stories pool: %d general, %d CFA", len(available_general), len(available_cfa))
+
+    if not available_general and not available_cfa:
+        log.warning("CRITICAL: All stories in feed have already been published! Aborting to prevent duplicate posts.")
+        return None
+
+    used_norms = set()
+
+    primary = None
+    for s in available_general:
+        primary = s
+        used_norms.add(normalize_title(s["title"]))
+        break
+    if not primary and available_cfa:
+        primary = available_cfa[0]
+        used_norms.add(normalize_title(primary["title"]))
+
+    if not primary:
+        log.warning("No primary story available. Aborting generation.")
+        return None
+
+    secondary = None
+    for s in available_general:
+        norm = normalize_title(s["title"])
+        if norm not in used_norms and not is_already_published(s["title"], published_titles):
+            secondary = s
+            used_norms.add(norm)
+            break
+    if not secondary:
+        for s in available_cfa:
+            norm = normalize_title(s["title"])
+            if norm not in used_norms and not is_already_published(s["title"], published_titles):
+                secondary = s
+                used_norms.add(norm)
+                break
+
+    cfa_story = None
+    for s in available_cfa:
+        norm = normalize_title(s["title"])
+        if norm not in used_norms and not is_already_published(s["title"], published_titles):
+            cfa_story = s
+            used_norms.add(norm)
+            break
+    if not cfa_story:
+        for s in available_general:
+            norm = normalize_title(s["title"])
+            if norm not in used_norms and not is_already_published(s["title"], published_titles):
+                cfa_story = s
+                used_norms.add(norm)
+                break
 
     now_ist = datetime.now(IST)
     date_str = now_ist.strftime("%B %d, %Y · %I:%M %p IST")
@@ -529,6 +615,9 @@ def main():
         data = fetch_cfa_data()
         screener = fetch_us_quant_screener()
         post = generate_post(data, screener)
+        if not post:
+            log.warning("No new unpublished stories found. Skipping publication cycle to prevent duplicate posts.")
+            return
         log.info("Edition Ready: '%s'", post["title"])
         publish_to_substack(post, dry_run=args.dry_run)
 

@@ -169,8 +169,8 @@ def build_site():
         seen.add(s["title_hash"]); unique.append(s)
 
     unique.sort(key=lambda s: s["pub_date"] or datetime.datetime.min.replace(tzinfo=UTC), reverse=True)
-    fetch_articles_parallel(unique[:30])
-    for s in unique[30:]: s["full_content"] = s.get("summary", "")
+    fetch_articles_parallel(unique[:60])
+    for s in unique[60:]: s["full_content"] = s.get("summary", "")
 
     # Tag
     for s in unique:
@@ -189,8 +189,8 @@ def build_site():
             s["pub_date_str"] = "Date unavailable"
             s["pub_date_relative"] = ""
 
-    general = [{"title": s["title"], "full_content": s["full_content"], "source": s["source"], "pub_date_str": s["pub_date_str"], "pub_date_relative": s["pub_date_relative"]} for s in unique[:20]]
-    cfa = [{"title": s["title"], "full_content": s["full_content"], "source": s["source"], "pub_date_str": s["pub_date_str"], "pub_date_relative": s["pub_date_relative"], "cfa_topics": s["cfa_topics"], "exam_note": s["exam_note"]} for s in unique if s["cfa_topics"]][:20]
+    general = [{"title": s["title"], "full_content": s["full_content"], "source": s["source"], "pub_date_str": s["pub_date_str"], "pub_date_relative": s["pub_date_relative"]} for s in unique[:50]]
+    cfa = [{"title": s["title"], "full_content": s["full_content"], "source": s["source"], "pub_date_str": s["pub_date_str"], "pub_date_relative": s["pub_date_relative"], "cfa_topics": s["cfa_topics"], "exam_note": s["exam_note"]} for s in unique if s["cfa_topics"]][:50]
 
     data = {
         "general": general,
