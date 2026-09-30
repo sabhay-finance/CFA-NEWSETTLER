@@ -349,6 +349,20 @@
       "share_id": "",
       "link": "",
       "error": null
+    },
+    {
+      "date_ist": "2026-09-30",
+      "timestamp_ist": "2026-09-30 23:59:44 IST",
+      "slot_num": 6,
+      "scheduled_time_ist": "21:30",
+      "target": "The Macro Ledger (Substack)",
+      "category": "cross_asset_momentum",
+      "word_count": 154,
+      "text": "Modern portfolio theory tells you to diversify across asset classes.\nIn liquidity shock events, asset correlations converge toward 1.0, rendering static diversification useless.\n\nDuring the 2008 GFC, March 2020 COVID selloff, and 2022 inflation shock, traditional correlations between equities, emerging markets, corporate bonds, and commodities vanished as institutional margin calls forced indiscriminate selling across all liquid assets.\n\nSystematic multi-asset allocators protect capital through risk-parity budgeting combined with dynamic trend filters. By targeting equal risk contribution rather than equal dollar allocation, and overlaying time-series momentum (TSMOM) across futures contracts, trend-following CTAs generated positive alpha in 2008 (+18%) and 2022 (+21%) while standard balanced portfolios suffered 20%+ drawdowns.\n\nTrue portfolio diversification is not holding multiple assets that rise together; it is holding orthogonal risk streams that carry positive expected carry across distinct macro regimes.\n\nLearn how to build institutional multi-asset trend following and risk parity models on The Macro Ledger: https://sabhay1.substack.com\n\n#RiskParity #TrendFollowing #CrossAsset #AssetAllocation #TheMacroLedger",
+      "success": false,
+      "share_id": "",
+      "link": "",
+      "error": null
     }
   ]
 }

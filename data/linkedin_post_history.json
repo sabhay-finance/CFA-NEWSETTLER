@@ -516,5 +516,61 @@
     "share_id": "",
     "link": "",
     "error": null
+  },
+  {
+    "date_ist": "2026-09-30",
+    "timestamp_ist": "2026-09-30 23:59:28 IST",
+    "slot_num": 3,
+    "scheduled_time_ist": "14:00",
+    "target": "The Macro Ledger (Substack)",
+    "category": "factor_alpha",
+    "word_count": 142,
+    "text": "The Value factor has underperformed for long stretches not because valuation doesn't matter, but because traditional book-to-price metrics measure obsolete balance sheet accounting.\nIn knowledge-based economies, intangible capital dominates tangible assets.\n\nFama and French originally defined Value using book-to-market. In modern markets, capitalizing R&D expenses and intellectual property adjustments fundamentally inverts the Value rank order across S&P 500 and mid-cap equities.\n\nCompanies trading at optically high price-to-book multiples frequently possess massive, uncapitalized operational moats and high cash-flow reinvestment rates. Naive value screeners systematically buy balance sheet distress while shunning high-ROIC compounders.\n\nTrue factor alpha requires dynamic adjustments for intangible amortization, lease capitalization, and cash-flow durability. When value is measured by real cash-flow yields rather than backward accounting book value, the factor alpha reappears with statistical significance.\n\nDiscover our updated quantitative factor architectures on The Macro Ledger: https://sabhay1.substack.com\n\n#FactorInvesting #ValueFactor #FinancialModeling #QuantResearch #TheMacroLedger",
+    "success": false,
+    "share_id": "",
+    "link": "",
+    "error": null
+  },
+  {
+    "date_ist": "2026-09-30",
+    "timestamp_ist": "2026-09-30 23:59:33 IST",
+    "slot_num": 4,
+    "scheduled_time_ist": "17:00",
+    "target": "Aegis US Quant Screener",
+    "category": "volume_rvol",
+    "word_count": 158,
+    "text": "High trading volume is meaningless unless normalized against the time-of-day distribution.\nA 100,000-share print at 09:40 AM carries a completely different statistical weight than at 01:30 PM.\n\nIntraday volume follows a well-known U-shaped curve: heavy at the open, declining through midday, and surging again into the closing bell. Traditional volume moving averages fail because they treat midday liquidity identically to opening cross volatility.\n\nRelative Volume (RVOL) solves this by comparing cumulative volume at any specific minute of the session against the average volume executed by that exact minute over the preceding 20 trading sessions. When a stock displays an intraday RVOL > 3.0 during midday consolidation, it signals non-standard institutional accumulation or block rebalancing.\n\nQuant screeners equipped with session-aware RVOL engines enable systematic traders to detect institutional positioning hours before closing block prints appear on the tape.\n\nRun session-aware RVOL and volume anomaly scans across 4,900+ US equities on Aegis Quant: https://us-market-quant-screener.vercel.app/\n\n#RVOL #Microstructure #QuantScreener #AlgorithmicTrading #AegisQuant #Equities",
+    "success": false,
+    "share_id": "",
+    "link": "",
+    "error": null
+  },
+  {
+    "date_ist": "2026-09-30",
+    "timestamp_ist": "2026-09-30 23:59:38 IST",
+    "slot_num": 5,
+    "scheduled_time_ist": "19:30",
+    "target": "The Macro Ledger (Substack)",
+    "category": "backtest_execution",
+    "word_count": 157,
+    "text": "Overfitting in quantitative trading is like memorizing the answers to last year's exam.\nYou get a perfect score on the practice test, but fail the live paper every single time.\n\nWhen an analyst tests 200 combinations of moving averages and RSI thresholds to find the single curve that maximized returns over the past 5 years, they haven't discovered an economic principle. They have merely fit parameters to historical noise.\n\nTo combat parameter overfitting, institutional quant teams utilize Combinatorial Purged Cross-Validation (CPCV) and Deflated Sharpe Ratios (DSR). By penalizing performance based on the total number of historical hypotheses tested, DSR computes the true statistical probability that a strategy's observed Sharpe is genuine skill rather than lucky variance.\n\nIf a quantitative model lacks economic intuition and fails under out-of-sample perturbations, it should never be allocated live trading capital.\n\nRead our deep dive on statistical deflated Sharpe ratios and cross-validation on The Macro Ledger: https://sabhay1.substack.com\n\n#MachineLearningInFinance #Backtesting #Overfitting #QuantResearch #TheMacroLedger",
+    "success": false,
+    "share_id": "",
+    "link": "",
+    "error": null
+  },
+  {
+    "date_ist": "2026-09-30",
+    "timestamp_ist": "2026-09-30 23:59:44 IST",
+    "slot_num": 6,
+    "scheduled_time_ist": "21:30",
+    "target": "The Macro Ledger (Substack)",
+    "category": "cross_asset_momentum",
+    "word_count": 154,
+    "text": "Modern portfolio theory tells you to diversify across asset classes.\nIn liquidity shock events, asset correlations converge toward 1.0, rendering static diversification useless.\n\nDuring the 2008 GFC, March 2020 COVID selloff, and 2022 inflation shock, traditional correlations between equities, emerging markets, corporate bonds, and commodities vanished as institutional margin calls forced indiscriminate selling across all liquid assets.\n\nSystematic multi-asset allocators protect capital through risk-parity budgeting combined with dynamic trend filters. By targeting equal risk contribution rather than equal dollar allocation, and overlaying time-series momentum (TSMOM) across futures contracts, trend-following CTAs generated positive alpha in 2008 (+18%) and 2022 (+21%) while standard balanced portfolios suffered 20%+ drawdowns.\n\nTrue portfolio diversification is not holding multiple assets that rise together; it is holding orthogonal risk streams that carry positive expected carry across distinct macro regimes.\n\nLearn how to build institutional multi-asset trend following and risk parity models on The Macro Ledger: https://sabhay1.substack.com\n\n#RiskParity #TrendFollowing #CrossAsset #AssetAllocation #TheMacroLedger",
+    "success": false,
+    "share_id": "",
+    "link": "",
+    "error": null
   }
 ]
