@@ -363,6 +363,34 @@
       "share_id": "",
       "link": "",
       "error": null
+    },
+    {
+      "date_ist": "2026-10-01",
+      "timestamp_ist": "2026-10-01 12:48:35 IST",
+      "slot_num": 1,
+      "scheduled_time_ist": "08:00",
+      "target": "The Macro Ledger (Substack)",
+      "category": "macro_rates",
+      "word_count": 164,
+      "text": "Macroeconomic releases do not move markets in isolation.\nPrice action is driven strictly by the delta between high-frequency economic surprises and existing institutional positioning.\n\nWhen US 10-Year yields test critical multi-year highs while the US Dollar Index diverges from crude oil, traditional 60/40 asset allocation models face systemic correlation breakdown. During high-inflation regimes, the historical -0.30 correlation between stocks and bonds flips positive, eliminating classical portfolio diversification benefits.\n\nSystematic macro desks do not wait for backward-looking GDP or revision prints. Instead, quantitative frameworks decompose macro surprise indices, cross-asset momentum vectors, and yield curve slope dynamics to dynamically adjust risk budgets across regimes.\n\nBy monitoring real-time breakeven inflation spreads and terminal policy expectations across overnight index swaps (OIS), quants identify cross-asset dislocations weeks before they hit mainstream headlines. If your asset allocation assumes static historical covariance, you are taking unhedged tail risk in an evolving macro regime.\n\nExplore our quantitative macro frameworks and Tape Notes on The Macro Ledger: https://sabhay1.substack.com\n\n#MacroTape #CrossAsset #AssetAllocation #SystematicTrading #TheMacroLedger",
+      "success": true,
+      "share_id": "urn:li:share:7511323670791819264",
+      "link": "https://www.linkedin.com/feed/update/urn:li:share:7511323670791819264",
+      "error": null
+    },
+    {
+      "date_ist": "2026-10-01",
+      "timestamp_ist": "2026-10-01 12:48:37 IST",
+      "slot_num": 2,
+      "scheduled_time_ist": "11:00",
+      "target": "Aegis US Quant Screener",
+      "category": "volatility_risk",
+      "word_count": 149,
+      "text": "Volatility clustering is not market noise; it is the physical fingerprint of institutional liquidity reallocation.\nIgnoring the spread between short-term HV and medium-term HV is why trend trades fail.\n\nMandelbrot observed that large price changes tend to be followed by large price changes, of either sign. In practical quantitative equity screening, when 20-day historical volatility (HV20) compresses below the 15th percentile of 60-day historical volatility (HV60), an energetic coiled spring is formed.\n\nBreakouts from severe volatility compression regimes exhibit twice the directional persistence of standard momentum signals. Conversely, entering after HV20 has already doubled its baseline exposes the portfolio to mean-reverting chop and adverse execution slippage.\n\nBy screening securities specifically during the pre-expansion consolidation window, systematic investors capture the meat of the move while maintaining mathematically defined, tight volatility stop thresholds.\n\nFilter high-probability volatility compression setups across NYSE/NASDAQ on Aegis US Quant Screener: https://us-market-quant-screener.vercel.app/\n\n#VolatilityClustering #StockScreener #QuantitativeAnalysis #AlgorithmicTrading #AegisQuant",
+      "success": true,
+      "share_id": "urn:li:share:7511323676508581888",
+      "link": "https://www.linkedin.com/feed/update/urn:li:share:7511323676508581888",
+      "error": null
     }
   ]
 }
