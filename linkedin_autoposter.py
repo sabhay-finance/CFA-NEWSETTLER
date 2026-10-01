@@ -264,7 +264,18 @@ GENERAL_FINANCE_VAULT: Dict[str, List[Dict[str, Any]]] = {
 }
 
 
-def load_history() -> List[dict]:
+def sync_remote_history():
+    """Silently syncs latest post history with GitHub remote if available."""
+    try:
+        import subprocess
+        subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], cwd=str(BASE_DIR), capture_output=True, timeout=12)
+    except Exception:
+        pass
+
+
+def load_history(pull_remote: bool = False) -> List[dict]:
+    if pull_remote:
+        sync_remote_history()
     history = []
     if HISTORY_FILE.exists():
         try:
