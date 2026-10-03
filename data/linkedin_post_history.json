@@ -2344,5 +2344,33 @@
     "share_id": "urn:li:share:7512038823296442368",
     "link": "https://www.linkedin.com/feed/update/urn:li:share:7512038823296442368",
     "error": null
+  },
+  {
+    "date_ist": "2026-10-03",
+    "timestamp_ist": "2026-10-03 18:10:20 IST",
+    "slot_num": "gf_2",
+    "scheduled_time_ist": "12:30",
+    "target": "Practical Investing & Valuation Frameworks",
+    "category": "investing_valuation",
+    "word_count": 171,
+    "text": "Market timing is the most expensive hobby in finance.\nHere is the empirical proof:\n\nBank of America ran a 90-year study analyzing S&P 500 returns since 1930:\n\nIf an investor stayed invested through all market ups and downs, their cumulative return was +17,715%.\n\nNow look at what happens if you tried to time the market and missed just the 10 best trading days of each decade:\n\nYour total return plummeted to just +28%.\n\nRead that again:\n+17,715% vs +28%.\n\nWhy? Because the market's single best days almost always occur within 2 weeks of the absolute worst crash days.\n\nIf you panic and exit during the drop, you miss the explosive rebound that drives 80% of long-term equity returns.\n\nTime in the market beats timing the market. Every single time.\n\n💡 Have you ever sold during a market panic and regretted it later?\n\n---\nFound this useful?\n→ Repost to share with your network ♻️\n→ Follow Sabhay Tomar for daily practical finance breakdowns & investing insights.\n\n#StockMarket #InvestingTips #BehavioralFinance #LongTermInvesting #Wealth",
+    "success": true,
+    "share_id": "urn:li:share:7512129417712775168",
+    "link": "https://www.linkedin.com/feed/update/urn:li:share:7512129417712775168",
+    "error": null
+  },
+  {
+    "date_ist": "2026-10-03",
+    "timestamp_ist": "2026-10-03 18:10:22 IST",
+    "slot_num": "gf_3",
+    "scheduled_time_ist": "17:00",
+    "target": "Business Moats & Corporate Finance Lessons",
+    "category": "corporate_moats",
+    "word_count": 199,
+    "text": "Warren Buffett coined the term 'Economic Moat'.\nEvery enduring compounder in history relies on one of these 4 competitive moats:\n\nIf a business generates high returns on capital, competitors will inevitably try to copy it and drive margins down.\n\nA moat is what keeps competitors from stealing the castle:\n\n1. Network Effects:\nThe product becomes more valuable with every new user (e.g. Visa, Mastercard, LinkedIn, YouTube). Once critical mass is reached, it’s virtually unassailable.\n\n2. High Switching Costs:\nThe friction, risk, and expense of migrating away exceeds the cost of staying (e.g. Bloomberg terminals, enterprise ERPs, specialized medical software).\n\n3. Cost Advantage:\nDelivering goods or services at a structural cost per unit that nobody else can match (e.g. Costco, GEICO, Amazon scale).\n\n4. Intangible Assets:\nPatents, regulatory licenses, or pricing power brands that command a durable customer premium (e.g. Ferrari, Apple, pharmaceutical patents).\n\nBefore you look at valuation multiples, check the depth of the moat.\n\n💡 Which company has the widest economic moat in the world today in your view?\n\n---\nFound this useful?\n→ Repost to share with your network ♻️\n→ Follow Sabhay Tomar for daily practical finance breakdowns & investing insights.\n\n#WarrenBuffett #CompetitiveAdvantage #EconomicMoats #BusinessStrategy #Investing",
+    "success": true,
+    "share_id": "urn:li:share:7512129423236841472",
+    "link": "https://www.linkedin.com/feed/update/urn:li:share:7512129423236841472",
+    "error": null
   }
 ]
