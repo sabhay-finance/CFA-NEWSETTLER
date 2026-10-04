@@ -22,6 +22,7 @@ import sys
 import ssl
 import json
 import random
+import fcntl
 import logging
 import argparse
 import urllib.request
@@ -510,34 +511,49 @@ def run_catch_up(dry_run: bool = False):
     """
     Scans the 4 daily slots for today in IST.
     Any slot whose scheduled time has already arrived and has NOT been posted yet today
-    is executed immediately.
+    is executed immediately. Protected by non-blocking file lock.
     """
-    now_ist = datetime.now(IST)
-    date_str = now_ist.strftime("%Y-%m-%d")
-    current_minutes = now_ist.hour * 60 + now_ist.minute
-    
-    log.info(f"Running catch-up engine for {date_str} at {now_ist.strftime('%H:%M:%S IST')}...")
-    history = load_history()
-    
-    pending_slots = []
-    for s in SLOTS:
-        h, m = map(int, s["time_ist"].split(":"))
-        slot_mins = h * 60 + m
-        if slot_mins <= current_minutes:
-            if not is_slot_already_posted(date_str, s["slot_num"], history):
-                pending_slots.append(s)
-            else:
-                log.info(f"Slot #{s['slot_num']} ({s['time_ist']} IST - {s['target']}) is ALREADY posted today.")
-        else:
-            log.info(f"Slot #{s['slot_num']} ({s['time_ist']} IST - {s['target']}) is upcoming later today.")
-
-    if not pending_slots:
-        log.info("🎉 All due slots for today are already posted! No catch-up needed.")
+    lock_file = DATA_DIR / "autoposter.lock"
+    try:
+        lock_fd = open(lock_file, "w")
+        fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except (IOError, OSError):
+        log.info("Another autoposter instance is actively executing. Exiting gracefully.")
         return
 
-    log.info(f"Found {len(pending_slots)} pending due slot(s) for today. Executing in sequence...")
-    for s in pending_slots:
-        execute_slot(s, dry_run=dry_run)
+    try:
+        now_ist = datetime.now(IST)
+        date_str = now_ist.strftime("%Y-%m-%d")
+        current_minutes = now_ist.hour * 60 + now_ist.minute
+        
+        log.info(f"Running catch-up engine for {date_str} at {now_ist.strftime('%H:%M:%S IST')}...")
+        history = load_history()
+        
+        pending_slots = []
+        for s in SLOTS:
+            h, m = map(int, s["time_ist"].split(":"))
+            slot_mins = h * 60 + m
+            if slot_mins <= current_minutes:
+                if not is_slot_already_posted(date_str, s["slot_num"], history):
+                    pending_slots.append(s)
+                else:
+                    log.info(f"Slot #{s['slot_num']} ({s['time_ist']} IST - {s['target']}) is ALREADY posted today.")
+            else:
+                log.info(f"Slot #{s['slot_num']} ({s['time_ist']} IST - {s['target']}) is upcoming later today.")
+
+        if not pending_slots:
+            log.info("🎉 All due slots for today are already posted! No catch-up needed.")
+            return
+
+        log.info(f"Found {len(pending_slots)} pending due slot(s) for today. Executing in sequence...")
+        for s in pending_slots:
+            execute_slot(s, dry_run=dry_run)
+    finally:
+        try:
+            fcntl.flock(lock_fd, fcntl.LOCK_UN)
+            lock_fd.close()
+        except Exception:
+            pass
 
 
 def show_status():
