@@ -530,6 +530,13 @@ def execute_slot(slot: Dict[str, Any], dry_run: bool = False) -> bool:
             }
             save_history(entry)
             
+            # Cross-post to X (Twitter)
+            try:
+                from x_autoposter import publish_tweet
+                publish_tweet(category=post["category"])
+            except Exception as xe:
+                log.warning(f"X cross-posting: {xe}")
+            
             print("\n" + "=" * 65)
             print(f"SLOT #{post['slot_num']} | TARGET: {post['target']} | WORDS: {post['word_count']}")
             print("=" * 65)
