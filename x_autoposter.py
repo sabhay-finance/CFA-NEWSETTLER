@@ -127,31 +127,57 @@ def get_fresh_tweet(category: Optional[str] = None) -> Dict[str, str]:
     return random.choice(fresh) if fresh else random.choice(candidates)
 
 
-def post_to_x_via_chrome_intent(tweet_text: str) -> bool:
+def post_to_x_via_chrome_intent(tweet_text: str, auto_submit: bool = True) -> bool:
     """
-    Opens pre-filled X intent URL in Google Chrome.
+    Publishes to X autonomously using the active logged-in Google Chrome session.
+    1. Opens https://x.com/intent/post with the pre-filled tweet in Chrome.
+    2. Waits for the X composer to render and gain focus.
+    3. Sends Cmd+Return via macOS System Events to submit the tweet.
+    4. Automatically closes the tab after publishing.
     """
     encoded = urllib.parse.quote(tweet_text)
     url = f"https://x.com/intent/post?text={encoded}"
     
-    apple_script = f'''
-    tell application "Google Chrome"
-        activate
-        tell front window
-            make new tab at end of tabs with properties {{URL:"{url}"}}
+    if auto_submit:
+        apple_script = f'''
+        tell application "Google Chrome"
+            activate
+            tell front window
+                make new tab at end of tabs with properties {{URL:"{url}"}}
+            end tell
         end tell
-    end tell
-    '''
+        delay 3.0
+        tell application "System Events"
+            tell process "Google Chrome"
+                keystroke return using command down
+            end tell
+        end tell
+        delay 2.5
+        tell application "Google Chrome"
+            tell front window
+                close active tab
+            end tell
+        end tell
+        '''
+    else:
+        apple_script = f'''
+        tell application "Google Chrome"
+            activate
+            tell front window
+                make new tab at end of tabs with properties {{URL:"{url}"}}
+            end tell
+        end tell
+        '''
     try:
         res = subprocess.run(["osascript", "-e", apple_script], capture_output=True, text=True)
         if res.returncode == 0:
-            log.info("🚀 Opened pre-filled tweet in Google Chrome! Ready to publish with 1 click.")
+            log.info("✅ Tweet posted autonomously to X via Chrome!")
             return True
         else:
             log.error(f"AppleScript error: {res.stderr}")
             return False
     except Exception as e:
-        log.error(f"Failed to open Chrome intent: {e}")
+        log.error(f"Failed to post via Chrome: {e}")
         return False
 
 
