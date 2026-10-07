@@ -405,6 +405,20 @@
       "share_id": "",
       "link": "",
       "error": null
+    },
+    {
+      "date_ist": "2026-10-07",
+      "timestamp_ist": "2026-10-07 12:51:37 IST",
+      "slot_num": "peak_1",
+      "scheduled_time_ist": "08:30",
+      "target": "Morning Prime (08:30 IST) — Wealth Mindset & Personal Finance Rules",
+      "category": "financial_hacks",
+      "word_count": 185,
+      "text": "You don't need to master 100 complex Excel formulas to succeed in corporate finance and investing.\n90% of financial analysis relies on these 4 tools:\n\n1. XLOOKUP:\nCompletely replaces VLOOKUP and HLOOKUP. It searches in any direction, doesn't break when columns are added, and handles missing values gracefully without errors.\n\n2. XNPV and XIRR:\nUnlike standard NPV and IRR, XNPV and XIRR handle irregular cash flow dates. Crucial for calculating real-world private equity, real estate, and portfolio returns.\n\n3. SUMIFS / COUNTIFS:\nFilters large transaction datasets by multiple conditions simultaneously (e.g. Total revenue for Region A where margin > 20%).\n\n4. Data Tables (Sensitivity Analysis):\nInstantly stress-tests valuation models across 2 variables (e.g. see target share price across 5 different discount rates and 5 terminal growth rates in seconds).\n\nMaster the fundamentals thoroughly.\n\n👇 Quick Question for the comments:\nWhich Excel formula or shortcut is your #1 favorite for financial modeling? Drop your go-to below 👇\n\n---\nFound this useful?\n→ Repost to share with your network ♻️\n→ Follow Sabhay Tomar for daily practical finance breakdowns & investing insights.\n\n#FinancialModeling #ExcelTips #CorporateFinance #Productivity #FinancialAnalyst",
+      "success": true,
+      "share_id": "",
+      "link": "",
+      "error": null
     }
   ]
 }
