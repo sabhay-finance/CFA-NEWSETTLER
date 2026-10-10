@@ -1980,5 +1980,19 @@
     "share_id": "",
     "link": "",
     "error": null
+  },
+  {
+    "date_ist": "2026-10-10",
+    "timestamp_ist": "2026-10-10 19:25:02 IST",
+    "slot_num": "peak_2",
+    "scheduled_time_ist": "18:30",
+    "target": "Evening Prime (18:30 IST) — Practical Investing Frameworks & Valuation",
+    "category": "investing_valuation",
+    "word_count": 220,
+    "text": "Buying a stock solely because its P/E ratio is low is the most common value trap in investing.\nHere is why a 10x P/E can be expensive, and a 35x P/E can be cheap:\n\nThe Price-to-Earnings (P/E) ratio looks backward. It tells you what you paid for yesterday's earnings.\n\nConsider two companies:\n\nCompany A (Old Retailer):\n• P/E: 8x\n• Revenue: Declining 5% per year\n• Debt: High\n• ROIC: 4%\n• Outlook: Margins contracting as competitors eat market share.\n→ At 8x, Company A is a Value Trap. Its earnings will shrink, making next year's P/E 15x.\n\nCompany B (Cloud Software Compounder):\n• P/E: 32x\n• Revenue: Growing 22% per year\n• Debt: Zero\n• ROIC: 25%\n• Margins: Expanding with strong pricing power.\n→ Within 4 years of compounding, Company B's earnings double, effectively dropping your purchase multiple to 16x.\n\nValuation is not about the lowest price multiple. It is about the price paid relative to future cash generation.\n\n👇 Quick Question for the comments:\nWhich camp are you in: A) Deep Value (low P/E bargains) or B) High-Quality Growth (high ROIC compounders)? Drop A or B below 👇\n\n---\nFound this useful?\n→ Repost to share with your network ♻️\n→ Follow Sabhay Tomar for daily practical finance breakdowns & investing insights.\n\n#ValueInvesting #Valuation #Stocks #InvestingFrameworks #FinancialAnalysis",
+    "success": true,
+    "share_id": "",
+    "link": "",
+    "error": null
   }
 ]
