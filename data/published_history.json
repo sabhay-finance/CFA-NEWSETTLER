@@ -559,6 +559,20 @@
       "share_id": "",
       "link": "",
       "error": null
+    },
+    {
+      "date_ist": "2026-10-12",
+      "timestamp_ist": "2026-10-12 22:23:40 IST",
+      "slot_num": "peak_2",
+      "scheduled_time_ist": "18:30",
+      "target": "Evening Prime (18:30 IST) — Practical Investing Frameworks & Valuation",
+      "category": "investing_valuation",
+      "word_count": 203,
+      "text": "A company can report $50 million in Net Profit and still go bankrupt.\nHow? Because Net Profit is an accounting opinion. Cash Flow is a reality.\n\nHere is how corporate accounting tricks retail investors:\n\nUnder accrual accounting, a company records Revenue the moment an invoice is sent—even if the client hasn't paid a single penny.\n\nIf a company books $100M in sales, reports $50M in Net Income, but all $100M is stuck in Accounts Receivable (uncollected bills), its actual cash balance is $0.\n\nIf it cannot pay employee salaries or bond interest next month, it enters liquidation.\n\n📌 Always compare Net Income with Operating Cash Flow (OCF):\n• Healthy Business: Operating Cash Flow is equal to or higher than Net Income.\n• Red Flag Business: Net Income is rising, but Operating Cash Flow is negative or collapsing.\n\nNever buy a stock without checking the Cash Flow Statement.\n\n👇 Quick Question for the comments:\nCan you name a famous company that was profitable on paper right before collapsing? (Enron, Lehman, etc.) Drop it below 👇\n\n---\nFound this useful?\n→ Repost to share with your network ♻️\n→ Follow Sabhay Tomar for daily practical finance breakdowns & investing insights.\n\n#CorporateFinance #CashFlow #Investing #FinancialStatements #StockAnalysis",
+      "success": true,
+      "share_id": "",
+      "link": "",
+      "error": null
     }
   ]
 }
