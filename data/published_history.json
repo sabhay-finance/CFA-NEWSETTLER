@@ -727,6 +727,20 @@
       "share_id": "",
       "link": "",
       "error": null
+    },
+    {
+      "date_ist": "2026-10-18",
+      "timestamp_ist": "2026-10-18 22:08:01 IST",
+      "slot_num": "peak_2",
+      "scheduled_time_ist": "18:30",
+      "target": "Evening Prime (18:30 IST) — Practical Investing Frameworks & Valuation",
+      "category": "investing_valuation",
+      "word_count": 214,
+      "text": "You don't need a CFA or an MBA to read a company's Balance Sheet.\nYou just need to inspect these 4 lines:\n\nMost people open a 10-K annual report and get intimidated by 150 pages of disclosures.\n\nHere is the 3-minute financial health checklist:\n\n1. Cash vs Total Debt:\nDoes the company have more cash and short-term investments than total short-term obligations? If Cash > Short-term Debt, bankruptcy risk is near zero.\n\n2. Current Ratio (Current Assets ÷ Current Liabilities):\nIf this ratio is above 1.5x, the business can easily pay its bills over the next 12 months without taking emergency loans.\n\n3. Retained Earnings Trajectory:\nAre retained earnings growing year-over-year? Growing retained earnings mean the business is profitable and compounding capital internally.\n\n4. Goodwill & Intangibles:\nIf Goodwill makes up more than 30% of total assets, beware. It often means management overpaid for past acquisitions that may face future write-downs.\n\nAlways check solvency before you check valuation.\n\n👇 Quick Question for the comments:\nWhat is the very first line item you look at when opening a company's financial report? Drop your metric below 👇\n\n---\nFound this useful?\n→ Repost to share with your network ♻️\n→ Follow Sabhay Tomar for daily practical finance breakdowns & investing insights.\n\n#FundamentalAnalysis #StockMarket #Accounting #InvestingTips #BalanceSheet",
+      "success": true,
+      "share_id": "",
+      "link": "",
+      "error": null
     }
   ]
 }
